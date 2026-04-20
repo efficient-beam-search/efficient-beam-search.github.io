@@ -1,0 +1,86 @@
+<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="pf2-a" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0,0 6,2 0,4" fill="#ccc"/>
+    </marker>
+  </defs>
+  <!-- Underlying graph -->
+  <g opacity="0.15">
+    <line x1="38" y1="89" x2="72" y2="41" stroke="#ddd" stroke-width="1.5" />
+    <line x1="94" y1="30" x2="146" y2="30" stroke="#ddd" stroke-width="1.5" />
+    <line x1="160" y1="44" x2="160" y2="96" stroke="#ddd" stroke-width="1.5" />
+    <line x1="44" y1="101" x2="146" y2="109" stroke="#ddd" stroke-width="1.5" />
+    <line x1="42" y1="93" x2="148" y2="37" stroke="#ddd" stroke-width="1.5" />
+    <line x1="90" y1="40" x2="150" y2="100" stroke="#ddd" stroke-width="1.5" />
+    <circle cx="80" cy="30" r="14" fill="#f5f5f5" stroke="#666" stroke-width="2"/>
+    <circle cx="160" cy="30" r="14" fill="#f5f5f5" stroke="#666" stroke-width="2"/>
+    <circle cx="160" cy="110" r="14" fill="#f5f5f5" stroke="#666" stroke-width="2"/>
+  </g>
+  <!-- Perception circle (moves with robot) -->
+  <circle r="100" fill="hsl(204,86%,96%)" fill-opacity="0.15" stroke="hsl(204,86%,75%)" stroke-width="1.5" stroke-dasharray="5,4">
+    <animate attributeName="cx" values="30;30;80;80;160;160;160;160" keyTimes="0;0.18;0.26;0.38;0.46;0.58;0.66;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="100;100;30;30;30;30;110;110" keyTimes="0;0.18;0.26;0.38;0.46;0.58;0.66;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Edges (appear as discovered) -->
+  <line x1="38" y1="89" x2="72" y2="41" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.08;0.12;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <line x1="94" y1="30" x2="146" y2="30" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.28;0.32;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <line x1="160" y1="44" x2="160" y2="96" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <line x1="44" y1="101" x2="146" y2="109" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <line x1="42" y1="93" x2="148" y2="37" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.28;0.32;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <line x1="90" y1="40" x2="150" y2="100" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf2-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="10s" repeatCount="indefinite"/>
+  </line>
+  <!-- Animated blue path overlay -->
+  <path d="M38,89 L72,41" fill="none" stroke="hsl(204,86%,53%)" stroke-width="2.5" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.32;1" dur="10s" repeatCount="indefinite"/>
+  </path>
+  <path d="M94,30 L146,30" fill="none" stroke="hsl(204,86%,53%)" stroke-width="2.5" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.32;0.35;0.50;0.52;1" dur="10s" repeatCount="indefinite"/>
+  </path>
+  <path d="M160,44 L160,96" fill="none" stroke="hsl(204,86%,53%)" stroke-width="2.5" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.55;1" dur="10s" repeatCount="indefinite"/>
+  </path>
+  <!-- Discovered nodes -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.08;0.12;1" dur="10s" repeatCount="indefinite"/>
+    <circle cx="80" cy="30" r="14" fill="#e8f4fd" stroke="#666" stroke-width="2"/>
+    <text x="80" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#333" font-family="sans-serif">3</text>
+  </g>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.28;0.32;1" dur="10s" repeatCount="indefinite"/>
+    <circle cx="160" cy="30" r="14" fill="#cce5f9" stroke="#666" stroke-width="2"/>
+    <text x="160" y="34" text-anchor="middle" font-size="10" font-weight="bold" fill="#333" font-family="sans-serif">5</text>
+  </g>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="10s" repeatCount="indefinite"/>
+    <circle cx="160" cy="110" r="14" fill="#d5eafb" stroke="#666" stroke-width="2"/>
+    <text x="160" y="114" text-anchor="middle" font-size="10" font-weight="bold" fill="#333" font-family="sans-serif">4</text>
+  </g>
+  <!-- vs (fades during reset) -->
+  <g>
+    <circle cx="30" cy="100" r="14" fill="#fff" stroke="#666" stroke-width="2"/>
+    <text x="30" y="104" text-anchor="middle" font-size="10" font-weight="bold" fill="#333" font-family="sans-serif">0</text>
+    <text x="30" y="123" text-anchor="middle" font-size="8" fill="#999" font-family="sans-serif" font-style="italic">start</text>
+    <text x="100" y="134" text-anchor="middle" font-size="8" fill="#aaa" font-family="sans-serif">node label = gain</text>
+  </g>
+  <!-- Robot dot (moves with perception) -->
+  <circle r="5" fill="hsl(204,86%,53%)" stroke="#fff" stroke-width="1.5">
+    <animate attributeName="cx" values="30;30;80;80;160;160;160;160" keyTimes="0;0.18;0.26;0.38;0.46;0.58;0.66;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="100;100;30;30;30;30;110;110" keyTimes="0;0.18;0.26;0.38;0.46;0.58;0.66;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Single end-stage decay: one shape takes over the full scene -->
+  <circle cx="100" cy="70" r="170" fill="#fff" opacity="0">
+    <animate attributeName="opacity" values="0;0;1.02;1.0" keyTimes="0;0.74;0.85;1" dur="10s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -3,37 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="An Efficient Beam Search Algorithm for Active Perception in Mobile Robotics">
+  <meta name="keywords" content="Beam Search, Active Perception, Informative Path Planning, Mobile Robotics, NBS, RRAG">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <title>Efficient Beam Search for Active Perception</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
         rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
 
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.85em' font-size='70'>🤖</text></svg>">
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -52,10 +50,10 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
+      <a class="navbar-item" href="https://efficient-beam-search.github.io">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
@@ -63,64 +61,48 @@
           More Research
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
+          <a class="navbar-item" href="https://ippon-paper.github.io/">
+            IPPON
           </a>
         </div>
       </div>
     </div>
-
   </div>
 </nav>
-
 
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
+          <h1 class="title is-1 publication-title">An Efficient Beam Search Algorithm for Active Perception in Mobile Robotics</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
+              <a href="https://scholar.google.com/citations?user=9TgpzJQAAAAJ&hl=en" target="_blank">Kaixian Qu</a>,</span>
             <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
+              Han Wang,</span>
             <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
+              <a href="https://www.victorklemm.com/" target="_blank">Victor Klemm</a>,</span>
             <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
+              <a href="https://cesarcadena.ethz.ch/" target="_blank">Cesar Cadena</a>,</span>
             <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+              <a href="https://rsl.ethz.ch/the-lab/people/person-detail.hutter.html" target="_blank">Marco Hutter</a>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+            <span class="author-block">Robotic Systems Lab, ETH Zurich</span>
+          </div>
+
+          <div class="is-size-5 publication-venue has-text-centered">
+            <span class="author-block"><i>International Journal of Robotics Research (IJRR)</i></span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
+              <!-- PDF Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -128,8 +110,9 @@
                   <span>Paper</span>
                 </a>
               </span>
+              <!-- arXiv Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -137,9 +120,9 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
+              <!-- Video Link -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
@@ -147,27 +130,17 @@
                   <span>Video</span>
                 </a>
               </span>
-              <!-- Code Link. -->
+              <!-- Code Link -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies"
+                <a href="https://openapero.github.io"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
-                  </a>
+                  <span style="font-family: 'Michroma', sans-serif;">Code</span>
+                </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
             </div>
-
           </div>
         </div>
       </div>
@@ -175,131 +148,277 @@
   </div>
 </section>
 
+<!-- Teaser -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
+      <img src="./static/images/Pipeline.jpg" alt="Surface reconstruction pipeline">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
+        NBS autonomously navigates a robot through cluttered environments, reconstructing surfaces
+        by balancing exploration of unknown regions with exploitation of known informative viewpoints.
       </h2>
     </div>
   </div>
 </section>
 
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
+
+    <!-- Abstract -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
+            Active perception is a fundamental problem in autonomous robotics in which the robot
+            must decide where to move and what to sense in order to obtain the most informative
+            observations for accomplishing its mission. Existing approaches either solve a
+            computationally expensive traveling salesman problem over heuristically selected
+            informative nodes, or adopt a more efficient but overly constrained shortest path tree
+            formulation.
           </p>
           <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
+            To address these limitations, we explore beam search algorithms as scalable alternatives.
+            While the standard beam search provides scalability by preserving the top-<i>B</i> paths
+            at each depth level, it is prone to local optima and exhibits parameter sensitivity. Our
+            first contribution is a <b>node-wise beam search (NBS)</b> algorithm, which maintains
+            top-<i>B</i> candidates per node to enable more effective exploration of the solution
+            space. Systematic benchmarking on graphs shows that NBS consistently outperforms other
+            baselines and maintains strong performance even at low beam widths.
           </p>
           <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
+            As a second contribution, we integrate the concept of frontiers into the path selection
+            criterion, introducing the <b>expected gain</b> metric, which better balances exploration
+            and exploitation compared to existing alternatives.
+          </p>
+          <p>
+            Our third contribution proposes the <b>rapidly-exploring random annulus graph (RRAG)</b>,
+            a novel graph construction method that preserves full orientation sampling and ensures
+            connectivity in cluttered environments through a fallback local sampling-based planner.
+          </p>
+          <p>
+            Extensive experiments demonstrate that NBS combined with RRAG achieves the highest
+            performance across all three representative active perception tasks, outperforming
+            state-of-the-art algorithms by at least 20% in one or more tasks. We further validate the
+            approach on real robotic platforms in different scenarios.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
 
-    <!-- Paper video. -->
+    <!-- Paper video (placeholder) -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+          <!-- Replace VIDEO_ID with your YouTube video ID -->
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;showinfo=0"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
     </div>
-    <!--/ Paper video. -->
+    <!--/ Paper video -->
+
+  </div>
+</section>
+
+
+<!-- Hardware Experiment Videos -->
+<section id="hardware-videos" class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Hardware Experiment Videos</h2>
+      <div class="tabs is-centered is-toggle is-toggle-rounded hardware-tabs" role="tablist" aria-label="Hardware scenarios">
+        <ul>
+          <li class="is-active">
+            <a href="#" data-scenario-tab="outdoor" aria-controls="scenario-outdoor">Outdoor</a>
+          </li>
+          <li>
+            <a href="#" data-scenario-tab="engine" aria-controls="scenario-engine">Engine Museum</a>
+          </li>
+          <li>
+            <a href="#" data-scenario-tab="cafeteria" aria-controls="scenario-cafeteria">Cafeteria</a>
+          </li>
+          <li>
+            <a href="#" data-scenario-tab="lab" aria-controls="scenario-lab">Lab</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content hardware-scenario-panel" id="scenario-outdoor" data-scenario-panel="outdoor">
+        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
+          Surface reconstruction &mdash; Outdoor
+        </p>
+        <div class="columns is-variable is-2">
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="real">
+                <source src="./static/videos/surface_reconstruction_outdoor_real.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="rviz">
+                <source src="./static/videos/surface_reconstruction_outdoor_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content hardware-scenario-panel is-hidden" id="scenario-cafeteria" data-scenario-panel="cafeteria">
+        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
+          Volumetric exploration &mdash; Cafeteria
+        </p>
+        <div class="columns is-variable is-2">
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="real">
+                <source src="./static/videos/volumetric_exploration_cafeteria_real.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="rviz">
+                <source src="./static/videos/volumetric_exploration_cafeteria_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content hardware-scenario-panel is-hidden" id="scenario-engine" data-scenario-panel="engine">
+        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
+          Surface reconstruction &mdash; Engine museum
+        </p>
+        <div class="columns is-variable is-2">
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="real">
+                <source src="./static/videos/surface_reconstruction_engine_real.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="rviz">
+                <source src="./static/videos/surface_reconstruction_engine_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content hardware-scenario-panel is-hidden" id="scenario-lab" data-scenario-panel="lab">
+        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
+          Volumetric exploration &mdash; Lab
+        </p>
+        <div class="columns is-variable is-2">
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="real">
+                <source src="./static/videos/volumetric_exploration_lab_real.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="box has-text-centered">
+              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
+              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="rviz">
+                <source src="./static/videos/volumetric_exploration_lab_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Hardware Experiment Videos -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <h2 class="title is-3 has-text-centered">Problem Formulation</h2>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            In active perception, a robot must decide where to move and what to observe in order
+            to maximize the information gained about its environment. We formulate this as a
+            budget-constrained path optimization on a directed graph
+            $\mathcal{G} = (\mathcal{V}, \mathcal{E}, g, c)$ with vertex gains $g(v) \geq 0$ and
+            positive edge costs $c(e) > 0$. The objective is to find a path $p^*$ starting from
+            $v_s$ that maximizes the accumulated gain under a cost budget:
+          </p>
+          $$p^* = \arg\max_{p \in \mathcal{P}} \; g(p) \quad \text{subject to} \quad c(p) \leq C$$
+          <p>
+            where $g(p)$ aggregates gains over the set of unique vertices visited and $c(p)$ sums edge
+            costs along the path. We study this problem under three progressively more realistic settings:
+          </p>
+          <ol>
+            <li><b>Graph a priori.</b> The graph is fully known in advance. The robot plans a path that
+              maximizes total gain within the budget.</li>
+            <li><b>Graph online perception.</b> The graph exists but is discovered incrementally through
+              local sensing within a perception radius $\rho$. The policy must adapt as new vertices
+              and edges are revealed, balancing exploitation of known high-gain regions with exploration
+              of the unknown.</li>
+            <li><b>Active perception.</b> No graph is given. The robot operates in continuous 3D space
+              and must autonomously construct a graph within the discovered collision-free space
+              $\mathcal{X}_{\mathrm{free}}$ while simultaneously planning and navigating to maximize a
+              task-dependent objective such as surface reconstruction or volumetric exploration.</li>
+          </ol>
+
+          <!-- Animated illustrations of the three settings -->
+          <div class="columns is-variable is-2 mt-5 mb-4">
+
+            <!-- (i) Graph A Priori -->
+            <div class="column">
+              <div class="has-text-centered">
+                <object type="image/svg+xml" data="./static/images/pf_graph_apriori.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <p class="is-size-7 has-text-grey mt-2"><b>(i)</b> Full graph known; optimal path drawn</p>
+              </div>
+            </div>
+
+            <!-- (ii) Online Perception -->
+            <div class="column">
+              <div class="has-text-centered">
+                <object type="image/svg+xml" data="./static/images/pf_online_perception.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <p class="is-size-7 has-text-grey mt-2"><b>(ii)</b> Nodes discovered as robot moves</p>
+              </div>
+            </div>
+
+            <!-- (iii) Active Perception -->
+            <div class="column">
+              <div class="has-text-centered">
+                <object type="image/svg+xml" data="./static/images/pf_active_perception.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <p class="is-size-7 has-text-grey mt-2"><b>(iii)</b> Graph built from free space</p>
+              </div>
+            </div>
+
+          </div>
+
+          <p>
+            We seek an algorithm that performs well across all three settings. The contributions
+            below address the path selection strategy (NBS, Expected Gain) and the graph construction
+            method (RRAG) needed for the active perception setting.
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -307,184 +426,473 @@
 <section class="section">
   <div class="container is-max-desktop">
 
-    <div class="columns is-centered">
+    <h2 class="title is-3 has-text-centered">Method Overview</h2>
 
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
+    <!-- NBS Algorithm -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Node-wise Beam Search (NBS)</h3>
+        <div class="content has-text-justified">
           <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
+            <b>Motivation.</b> Depth-wise beam search (DBS) maintains the top $B$ paths at each search depth, but this makes it prone to local optima&mdash;once the entire beam converges on regions with high immediate gains, it neglects other promising candidates. In the worst case, all $B$ paths in the beam may terminate at the same node.
           </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
+          <p>
+            <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This ensures that at least one promising path remains available at every visited node, encouraging exploration across the graph rather than focusing on immediate high-gain regions.
+          </p>
+        </div>
+
+        <!-- Algorithm pseudocode -->
+        <div class="content">
+          <div class="box">
+            <p class="title is-6"><b>Algorithm: Node-wise Beam Search (NBS)</b></p>
+            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$<br>
+            <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$</p>
+            <hr>
+            <ol>
+              <li>Initialize best path $p^* \leftarrow (v_s)$, per-node beam $\textbf{open}[v_s] \leftarrow \{(v_s)\}$</li>
+              <li><b>for</b> depth $d = 1$ to $D$ <b>do</b>
+                <ol type="a">
+                  <li>Initialize empty per-node heap $\textbf{heap}$</li>
+                  <li><b>for each</b> node $v \in \mathcal{V}$ with $\textbf{open}[v] \neq \emptyset$ <b>do</b>
+                    <ol type="i">
+                      <li><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b>
+                        <ol>
+                          <li><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b>
+                            <ul>
+                              <li>Extend: $p' \leftarrow p + (v, v')$</li>
+                              <li><b>if</b> $c(p') > C$: skip (budget exceeded)</li>
+                              <li><b>if</b> $q(p') > q(p^*)$: update $p^* \leftarrow p'$</li>
+                              <li>Insert $p'$ into $\textbf{heap}[v']$, keeping only top-$B$ paths per node</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>$\textbf{open} \leftarrow \textbf{heap}$</li>
+                </ol>
+              </li>
+              <li><b>return</b> $p^*$</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>Complexity.</b> NBS has time complexity $O(|\mathcal{E}|\,D\,B\,(D + \log B))$ and space complexity $O(|\mathcal{V}|\,D\,B)$. Even at beam width $B=1$, NBS delivers strong and robust performance due to its per-node diversity guarantee.
+          </p>
+        </div>
+
+        <!-- Complexity comparison table -->
+        <!-- <div class="content">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Time Complexity</th>
+                <th>Space Complexity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TSP</td>
+                <td>$\Omega(|\mathcal{V}|^3),\; O(|\mathcal{V}|^2 \, 2^{|\mathcal{V}|})$</td>
+                <td>$\Omega(|\mathcal{V}|^2),\; O(|\mathcal{V}| \, 2^{|\mathcal{V}|})$</td>
+              </tr>
+              <tr>
+                <td>SPT</td>
+                <td>$O(|\mathcal{V}||\mathcal{E}|)$</td>
+                <td>$O(|\mathcal{V}|)$</td>
+              </tr>
+              <tr>
+                <td>DBS</td>
+                <td>$O(|\mathcal{V}|\,D\,B\,(D + \log B))$</td>
+                <td>$O(D\,B)$</td>
+              </tr>
+              <tr class="has-background-success-light">
+                <td><b>NBS (ours)</b></td>
+                <td>$O(|\mathcal{E}|\,D\,B\,(D + \log B))$</td>
+                <td>$O(|\mathcal{V}|\,D\,B)$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Expected Gain -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Expected Gain: Balancing Exploration and Exploitation</h3>
+        <div class="content has-text-centered">
+          <img src="./static/images/expected_gain_illustration.png" alt="Expected gain illustration">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            The choice of <b>selection criterion</b> determines how candidate paths are ranked. We consider three criteria:
+          </p>
+
+          <p>
+            <b>1. Path Gain.</b> The most direct criterion, maximizing accumulated gain:
+          </p>
+          $$q(p) = g(p) = \sum_{v \in \{v_i \mid v_i \in p\}} g(v)$$
+
+          <p>
+            <b>2. Path Ratio.</b> A commonly used heuristic that optimizes gain-per-unit-cost:
+          </p>
+          $$r(p) = \frac{g(p)}{c(p)}$$
+          <p>
+            While intuitive, the ratio criterion has a fundamental flaw: once the highest-ratio path is found, the robot has no incentive to continue, even if budget remains.
+          </p>
+
+          <p>
+            <b>3. Expected Gain (ours).</b> We propose a criterion that explicitly accounts for exploration by incorporating <em>frontier information</em>. Let $\mathcal{F}$ denote the set of frontier nodes (nodes leading to graph expansion), and $\mathcal{P}_\mathcal{F}$ the set of paths ending at frontier nodes:
+          </p>
+          $$g_e(p) = \begin{cases} r(p) \cdot C, & \text{if } p \in \mathcal{P}_\mathcal{F} \\ g(p), & \text{otherwise} \end{cases}$$
+          <p>
+            For frontier paths, the expected gain extrapolates the current gain-to-cost ratio over the full budget $C$, estimating the potential future gain if the robot continues from the frontier into newly discovered regions. For non-frontier paths, it defaults to the path gain. This naturally balances exploration (via frontier extrapolation) and exploitation (via direct gain).
+          </p>
+          <p>
+            Equivalently, using the maximum frontier ratio $r_\mathcal{F}^* = \max_{p \in \mathcal{P}_\mathcal{F}} r(p)$:
+          </p>
+          $$\max_{p \in \mathcal{P}} \; g(p) + \mathbf{1}_{\mathcal{P}_\mathcal{F}}(p) \cdot r_\mathcal{F}^* \left(C - c(p)\right)$$
+          <p>
+            We prove that selecting the path with the highest individual ratio is equivalent to using the global maximum ratio $r_\mathcal{F}^*$ for extrapolation, so the optimal path can be determined <em>without</em> precomputing $r_\mathcal{F}^*$.
+          </p>
         </div>
       </div>
-      <!--/ Visual Effects. -->
+    </div>
 
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
+    <!-- RRAG -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Rapidly-Exploring Random Annulus Graph (RRAG)</h3>
+        <div class="content has-text-centered">
+          <div class="rrag-video-frame">
+            <video class="rrag-video" autoplay muted loop playsinline preload="metadata">
+              <source src="./static/videos/rrag_visualization_5x.mp4" type="video/mp4">
             </video>
           </div>
-
         </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
         <div class="content has-text-justified">
           <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
+            RRAG is an incrementally built graph for active perception, inspired by the Rapidly-exploring Random Graph (RRG). It enforces two spacing rules that give it an <em>annulus</em> structure:
           </p>
+          <ul>
+            <li><b>Minimum distance</b> $l_{\min}$: a new node is accepted only if its distance to all existing nodes exceeds $l_{\min}$, preventing oversampling.</li>
+            <li><b>Maximum distance</b> $l_{\max}$: edges are formed only between nodes within distance $l_{\max}$, bounding the out-degree.</li>
+          </ul>
         </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
+
+        <!-- RRAG Algorithm -->
+        <div class="content">
+          <div class="box">
+            <p class="title is-6"><b>Algorithm: RRAG Construction</b></p>
+            <p><b>Input:</b> Current graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</p>
+            <hr>
+            <ol>
+              <li><b>for</b> $i = 1$ to $n_{\text{new}}$ <b>do</b>
+                <ol type="a">
+                  <li>$v_{\text{new}} \leftarrow$ <code>SampleFree</code>()
+                    &nbsp; <span class="has-text-grey-light">[reject if within $l_{\min}$ of any existing node; relocate if beyond $l_{\max}$ from nearest]</span></li>
+                  <li><b>if</b> $v_{\text{new}}$ is invalid: <b>continue</b></li>
+                  <li>$v_{\text{nearest}} \leftarrow$ <code>Nearest</code>$(\mathcal{V}, v_{\text{new}})$</li>
+                  <li><b>if</b> <code>CollisionFree</code>$(v_{\text{nearest}}, v_{\text{new}})$ <b>then</b>
+                    <ol type="i">
+                      <li>$\mathcal{V}_{\text{near}} \leftarrow$ <code>Near</code>$(\mathcal{V}, v_{\text{new}}, l_{\max})$</li>
+                      <li><b>for each</b> $v_{\text{near}} \in \mathcal{V}_{\text{near}}$ <b>do</b>
+                        <ul>
+                          <li><b>if</b> <code>CollisionFree</code>$(v_{\text{near}}, v_{\text{new}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{near}}, v_{\text{new}})\}$</li>
+                          <li><b>if</b> <code>CollisionFree</code>$(v_{\text{new}}, v_{\text{near}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{new}}, v_{\text{near}})\}$</li>
+                        </ul>
+                      </li>
+                      <li>$\mathcal{V} \leftarrow \mathcal{V} \cup \{v_{\text{new}}\}$</li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li><b>return</b> $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</li>
+            </ol>
           </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
         </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
 
         <div class="content has-text-justified">
           <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
+            <b>Key properties:</b>
           </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
+          <ul>
+            <li><b>Full orientation preservation.</b> Unlike prior methods that keep only one orientation per position, RRAG retains all discrete orientations as distinct nodes within a <em>node cluster</em>, enabling richer path optimization.</li>
+            <li><b>Fallback local planner.</b> In narrow or cluttered environments where straight-line connections fail, a fallback local sampling-based planner (FLS) based on RRT* finds collision-free paths, ensuring graph connectivity.</li>
+            <li><b>Guaranteed connectivity.</b> We prove that the annulus graph is connected whenever $l_{\max} \geq 2\,l_{\min}$, provided the nodes satisfy packing and covering conditions.</li>
+          </ul>
         </div>
       </div>
     </div>
-    <!--/ Concurrent Work. -->
 
   </div>
 </section>
 
 
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <!-- Normalized Gain -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Active Perception Performance</h3>
+        <div class="content has-text-centered">
+          <img src="./static/images/normalized_gain_barplots_new2.png" alt="Normalized gain comparison">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            NBS achieves the highest normalized performance across all three representative active
+            perception tasks: <b>point collection</b>, <b>surface reconstruction</b>, and
+            <b>volumetric exploration</b>. It outperforms state-of-the-art methods (RRT, RRT*,
+            SPT, TSP, DBS, FUEL) by at least 20% in one or more tasks. NBS is particularly
+            strong in point collection, where the sparse gain distribution causes other methods
+            to get trapped in local optima.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Surface Reconstruction Comparison -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Surface Reconstruction Comparison</h3>
+        <div class="content has-text-centered">
+          <img src="./static/images/surface_reconstruction_comparision_new.jpg" alt="Surface reconstruction comparison">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison of surface reconstruction quality across planners. NBS
+            achieves the most complete coverage (445.73 m&sup2;), significantly outperforming
+            alternatives such as RRT* (301.75 m&sup2;) and FUEL (341.03 m&sup2;).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hardware Experiments -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Hardware Experiments</h3>
+        <div class="content has-text-justified">
+          <p>
+            We validate our approach on the ANYmal quadruped robot equipped with a ZED X Mini
+            camera, running the full planning and perception pipeline onboard. Experiments
+            span autonomous surface reconstruction in indoor/outdoor environments and volumetric
+            exploration in a cafeteria and lab. See the <a href="#hardware-videos">hardware experiment videos</a> for qualitative results across all scenarios.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- BibTeX -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@article{qu2026efficient,
+  title     = {An Efficient Beam Search Algorithm for Active Perception in Mobile Robotics},
+  author    = {Qu, Kaixian and Wang, Han and Klemm, Victor and Cadena, Cesar and Hutter, Marco},
+  journal   = {International Journal of Robotics Research (IJRR)},
+  year      = {2026}
 }</code></pre>
+  </div>
+</section>
+
+
+<!-- Acknowledgements -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    <p>
+      This research was supported by the Swiss National Science Foundation through the National
+      Centre of Competence in Digital Fabrication (NCCR dfab), by Huawei Tech R&amp;D (UK) through
+      a research funding agreement, and by an ETH RobotX research grant funded through the ETH
+      Zurich Foundation.
+    </p>
   </div>
 </section>
 
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
     <div class="columns is-centered">
       <div class="column is-8">
-        <div class="content">
+        <div class="content has-text-centered">
           <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            This website template is borrowed from
+            <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  setupScenarioSwitcher();
+
+  var allHardwareVideos = document.querySelectorAll('.hardware-video[data-sync-group]');
+  var groups = {};
+
+  allHardwareVideos.forEach(function (video) {
+    var group = video.getAttribute('data-sync-group');
+    var role = video.getAttribute('data-sync-role');
+    if (!groups[group]) {
+      groups[group] = {};
+    }
+    groups[group][role] = video;
+  });
+
+  Object.keys(groups).forEach(function (groupName) {
+    var pair = groups[groupName];
+    if (!pair.real || !pair.rviz) {
+      return;
+    }
+    attachPairSync(pair.real, pair.rviz);
+  });
+});
+
+function setupScenarioSwitcher() {
+  var tabLinks = document.querySelectorAll('[data-scenario-tab]');
+  var panels = document.querySelectorAll('[data-scenario-panel]');
+
+  if (!tabLinks.length || !panels.length) {
+    return;
+  }
+
+  function showScenario(name) {
+    tabLinks.forEach(function (link) {
+      var isActive = link.getAttribute('data-scenario-tab') === name;
+      if (link.parentElement) {
+        link.parentElement.classList.toggle('is-active', isActive);
+      }
+      link.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach(function (panel) {
+      var isActive = panel.getAttribute('data-scenario-panel') === name;
+      panel.classList.toggle('is-hidden', !isActive);
+
+      if (!isActive) {
+        panel.querySelectorAll('video').forEach(function (video) {
+          video.pause();
+        });
+      } else {
+        var activeVideos = panel.querySelectorAll('video.hardware-video');
+        activeVideos.forEach(function (video) {
+          video.currentTime = 0;
+        });
+
+        var leadVideo = panel.querySelector('video.hardware-video[data-sync-role="real"]') || activeVideos[0];
+        if (leadVideo) {
+          leadVideo.play().catch(function () {});
+        }
+      }
+    });
+  }
+
+  tabLinks.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      showScenario(link.getAttribute('data-scenario-tab'));
+    });
+  });
+
+  showScenario('outdoor');
+}
+
+function attachPairSync(real, rviz) {
+  var lock = false;
+
+  function syncTime(from, to) {
+    if (Math.abs(to.currentTime - from.currentTime) > 0.12) {
+      to.currentTime = from.currentTime;
+    }
+  }
+
+  function withLock(work) {
+    if (lock) {
+      return;
+    }
+    lock = true;
+    work();
+    setTimeout(function () {
+      lock = false;
+    }, 120);
+  }
+
+  real.addEventListener('play', function () {
+    withLock(function () {
+      syncTime(real, rviz);
+      rviz.play().catch(function () {});
+    });
+  });
+
+  rviz.addEventListener('play', function () {
+    withLock(function () {
+      syncTime(rviz, real);
+      real.play().catch(function () {});
+    });
+  });
+
+  real.addEventListener('pause', function () {
+    withLock(function () {
+      rviz.pause();
+    });
+  });
+
+  rviz.addEventListener('pause', function () {
+    withLock(function () {
+      real.pause();
+    });
+  });
+
+  real.addEventListener('seeked', function () {
+    withLock(function () {
+      rviz.currentTime = real.currentTime;
+    });
+  });
+
+  rviz.addEventListener('seeked', function () {
+    withLock(function () {
+      real.currentTime = rviz.currentTime;
+    });
+  });
+
+  real.addEventListener('timeupdate', function () {
+    if (real.paused || lock) {
+      return;
+    }
+    if (Math.abs(real.currentTime - rviz.currentTime) > 0.25) {
+      withLock(function () {
+        rviz.currentTime = real.currentTime;
+      });
+    }
+  });
+
+  rviz.addEventListener('timeupdate', function () {
+    if (rviz.paused || lock) {
+      return;
+    }
+    if (Math.abs(real.currentTime - rviz.currentTime) > 0.25) {
+      withLock(function () {
+        real.currentTime = rviz.currentTime;
+      });
+    }
+  });
+}
+</script>
 
 </body>
 </html>
