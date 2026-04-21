@@ -519,8 +519,8 @@
             The choice of selection criterion determines how candidate paths are ranked and which trade-offs the planner makes. We consider three criteria:
           </p>
           <ul>
-            <li><b>Path Gain</b> — maximizes total accumulated gain, favoring exploitation of known high-gain regions.</li>
-            <li><b>Path Ratio</b> — optimizes gain per unit cost, but once the highest-ratio path is found, the robot has no incentive to continue even when budget remains.</li>
+            <li><b>Path Gain</b> — maximizes total accumulated gain along the path, but provides no incentive to explore unknown regions.</li>
+            <li><b>Path Ratio</b> — optimizes gain-to-cost ratio, but implicitly assumes the current ratio can be sustained over the remaining budget — leaving no incentive to explore frontiers once the highest-ratio path is found.</li>
             <li><b>Expected Gain (ours)</b> — scores frontier paths by extrapolating their gain-to-cost ratio over the full budget, while non-frontier paths are scored by gain directly, naturally balancing exploration with exploitation.</li>
           </ul>
         </div>
@@ -571,7 +571,7 @@
 
                   <!-- Edge cost labels -->
                   <text x="148" y="106" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
-                  <text x="128" y="194" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
+                  <text x="158" y="194" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
                   <text x="315" y="73" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
 
                   <!-- v0 (Start) -->
@@ -612,10 +612,10 @@
                   <label class="label is-small mb-1" style="font-size:13px">
                     Budget&ensp;<em>C</em>&nbsp;=&nbsp;<span id="eg-bval" style="font-weight:800;font-size:1.25em;color:#4338ca">4</span>
                   </label>
-                  <input type="range" id="eg-slider" min="1" max="7" value="4" step="1"
+                  <input type="range" id="eg-slider" min="1" max="6" value="4" step="1"
                          style="width:100%;accent-color:#4338ca;cursor:pointer">
                   <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;margin-top:1px">
-                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
                   </div>
                 </div>
 
@@ -652,7 +652,7 @@
                 </table>
 
                 <!-- Criterion formula / hint -->
-                <div id="eg-fbox" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:9px 12px;font-size:11.5px;line-height:1.6"></div>
+                <div id="eg-fbox" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:9px 12px;font-size:11.5px;line-height:1.6;min-height:80px"></div>
               </div>
 
             </div>
@@ -1007,7 +1007,7 @@ function attachPairSync(real, rviz) {
   ];
   var PATHS = [
     { nodes: [0,1],   label: 'v\u2080\u2192v\u2081',                  edges: ['eg-path-01'] },
-    { nodes: [0,2],   label: 'v\u2080\u2192v\u2082\u2605',            edges: ['eg-path-02'] },
+    { nodes: [0,2],   label: 'v\u2080\u2192v\u2082',                   edges: ['eg-path-02'] },
     { nodes: [0,1,3], label: 'v\u2080\u2192v\u2081\u2192v\u2083',     edges: ['eg-path-01','eg-path-13'] },
   ];
 
@@ -1038,9 +1038,9 @@ function attachPairSync(real, rviz) {
     expected: { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
   };
   var FORMULAS = {
-    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; maximizes accumulated gain. Good for exploitation, but treats all paths the same regardless of whether budget remains for further exploration.',
-    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b style="color:#dc2626">Flaw:</b> v\u2080\u2192v\u2081 has ratio&thinsp;4 and always wins regardless of budget &mdash; even when extra budget allows reaching better paths.',
-    expected: '<b>Expected Gain (ours):</b> frontier paths (\u2605) score as $r(p)\\cdot C$, extrapolating their ratio over the full budget. Try sliding $C$ from 3 to 4: v\u2080\u2192v\u2082\u2605 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083!',
+    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; sums gain over all visited nodes. <b style="color:#b45309">Con:</b> no incentive to explore — frontier nodes offering higher future gain are not preferred.',
+    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b style="color:#b45309">Con:</b> implicitly assumes the current ratio holds for the remaining budget, ignoring frontier information entirely.',
+    expected: '<b>Expected Gain (ours):</b> frontier paths score as $r(p)\\cdot C$, extrapolating their ratio over the full budget. Try sliding $C$ from 3 to 4: v\u2080\u2192v\u2082 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083!',
   };
 
   var activeCrit = 'gain';
