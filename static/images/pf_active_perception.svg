@@ -5,15 +5,6 @@
     </marker>
   </defs>
 
-  <!-- Obstacle: barely visible initially, discovered when robot reaches node 1 -->
-  <g opacity="0.07">
-    <animate attributeName="opacity" values="0.07;0.07;0.85;0.85"
-             keyTimes="0;0.30;0.34;1" dur="10s" repeatCount="indefinite"/>
-    <polygon points="105,18 150,14 168,42 156,66 125,58 108,34"
-             fill="#e0e0e0" stroke="#bbb" stroke-width="1.5" stroke-linejoin="round"/>
-    <text x="138" y="42" text-anchor="middle" font-size="7" fill="#aaa" font-family="sans-serif">obstacle</text>
-  </g>
-
   <!-- Perception circle: always visible, follows robot -->
   <circle r="100" fill="hsl(204,86%,96%)" fill-opacity="0.25"
           stroke="hsl(204,86%,75%)" stroke-width="1.5" stroke-dasharray="5,4">
@@ -24,6 +15,15 @@
     <animate attributeName="opacity" values="1;1"
          keyTimes="0;1" dur="10s" repeatCount="indefinite"/>
   </circle>
+
+  <!-- Obstacle: barely visible initially, discovered when robot reaches node 1 -->
+  <g opacity="0.07">
+    <animate attributeName="opacity" values="0.07;0.07;0.85;0.85"
+             keyTimes="0;0.30;0.34;1" dur="10s" repeatCount="indefinite"/>
+    <polygon points="105,18 150,14 168,42 156,66 125,58 108,34"
+             fill="#e0e0e0" stroke="#bbb" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="138" y="42" text-anchor="middle" font-size="7" fill="#aaa" font-family="sans-serif">obstacle</text>
+  </g>
 
   <!-- Phase 1 edges (boundary-to-boundary so arrows land at node borders) -->
   <!-- S(28,110,r=8) → 1(100,55,r=7) -->
@@ -66,24 +66,24 @@
   <!-- Phase 1 nodes -->
   <g opacity="0">
     <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.06;0.08;1" dur="10s" repeatCount="indefinite"/>
-    <circle cx="100" cy="55" r="7" fill="hsl(204,86%,90%)" stroke="hsl(204,86%,53%)" stroke-width="1.5"/>
+    <circle cx="100" cy="55" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="100" y="58" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">4</text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.08;0.10;1" dur="10s" repeatCount="indefinite"/>
-    <circle cx="50" cy="82" r="7" fill="hsl(204,86%,90%)" stroke="hsl(204,86%,53%)" stroke-width="1.5"/>
+    <circle cx="50" cy="82" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="50" y="85" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">3</text>
   </g>
 
   <!-- Phase 2 nodes -->
   <g opacity="0">
     <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.36;0.38;1" dur="10s" repeatCount="indefinite"/>
-    <circle cx="125" cy="88" r="7" fill="hsl(204,86%,90%)" stroke="hsl(204,86%,53%)" stroke-width="1.5"/>
+    <circle cx="125" cy="88" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="125" y="91" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">5</text>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.39;0.41;1" dur="10s" repeatCount="indefinite"/>
-    <circle cx="168" cy="116" r="7" fill="hsl(204,86%,90%)" stroke="hsl(204,86%,53%)" stroke-width="1.5"/>
+    <circle cx="168" cy="116" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="168" y="119" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">2</text>
   </g>
 
