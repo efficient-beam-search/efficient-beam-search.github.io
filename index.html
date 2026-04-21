@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <style>
+    .eg-path-hl { transition: stroke 0.22s ease; }
+  </style>
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.85em' font-size='70'>🤖</text></svg>">
 
@@ -206,19 +209,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Paper video (placeholder) -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <!-- Replace VIDEO_ID with your YouTube video ID -->
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video -->
 
   </div>
 </section>
@@ -524,41 +514,149 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Expected Gain: Balancing Exploration and Exploitation</h3>
-        <div class="content has-text-centered">
-          <img src="./static/images/expected_gain_illustration.png" alt="Expected gain illustration">
-        </div>
         <div class="content has-text-justified">
           <p>
-            The choice of <b>selection criterion</b> determines how candidate paths are ranked. We consider three criteria:
+            The choice of selection criterion determines how candidate paths are ranked and which trade-offs the planner makes. We consider three criteria:
           </p>
+          <ul>
+            <li><b>Path Gain</b> — maximizes total accumulated gain, favoring exploitation of known high-gain regions.</li>
+            <li><b>Path Ratio</b> — optimizes gain per unit cost, but once the highest-ratio path is found, the robot has no incentive to continue even when budget remains.</li>
+            <li><b>Expected Gain (ours)</b> — scores frontier paths by extrapolating their gain-to-cost ratio over the full budget, while non-frontier paths are scored by gain directly, naturally balancing exploration with exploitation.</li>
+          </ul>
+        </div>
+        <div class="content" id="eg-demo-root">
+          <div class="box" style="background:#fafafa;border:1px solid #e2e8f0;padding:1rem 1.25rem">
+            <p class="has-text-centered is-size-7 has-text-grey mb-3">
+              Drag the budget slider and switch criteria to see which path each method selects
+            </p>
+            <div class="columns is-variable is-4">
 
-          <p>
-            <b>1. Path Gain.</b> The most direct criterion, maximizing accumulated gain:
-          </p>
-          $$q(p) = g(p) = \sum_{v \in \{v_i \mid v_i \in p\}} g(v)$$
+              <!-- SVG graph column -->
+              <div class="column is-half" style="display:flex;align-items:center">
+                <svg id="eg-svg" viewBox="0 0 480 305" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+                  <defs>
+                    <marker id="eg-arr" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                      <path d="M0,0.5 L0,5.5 L6.5,3 z" fill="#b0b8c8"/>
+                    </marker>
+                  </defs>
 
-          <p>
-            <b>2. Path Ratio.</b> A commonly used heuristic that optimizes gain-per-unit-cost:
-          </p>
-          $$r(p) = \frac{g(p)}{c(p)}$$
-          <p>
-            While intuitive, the ratio criterion has a fundamental flaw: once the highest-ratio path is found, the robot has no incentive to continue, even if budget remains.
-          </p>
+                  <!-- Region backgrounds -->
+                  <rect x="0" y="0" width="480" height="200" rx="6" fill="#e5e7eb" opacity="0.4"/>
+                  <rect x="0" y="200" width="480" height="105" rx="6" fill="#fef3c7" opacity="0.55"/>
 
-          <p>
-            <b>3. Expected Gain (ours).</b> We propose a criterion that explicitly accounts for exploration by incorporating <em>frontier information</em>. Let $\mathcal{F}$ denote the set of frontier nodes (nodes leading to graph expansion), and $\mathcal{P}_\mathcal{F}$ the set of paths ending at frontier nodes:
-          </p>
-          $$g_e(p) = \begin{cases} r(p) \cdot C, & \text{if } p \in \mathcal{P}_\mathcal{F} \\ g(p), & \text{otherwise} \end{cases}$$
-          <p>
-            For frontier paths, the expected gain extrapolates the current gain-to-cost ratio over the full budget $C$, estimating the potential future gain if the robot continues from the frontier into newly discovered regions. For non-frontier paths, it defaults to the path gain. This naturally balances exploration (via frontier extrapolation) and exploitation (via direct gain).
-          </p>
-          <p>
-            Equivalently, using the maximum frontier ratio $r_\mathcal{F}^* = \max_{p \in \mathcal{P}_\mathcal{F}} r(p)$:
-          </p>
-          $$\max_{p \in \mathcal{P}} \; g(p) + \mathbf{1}_{\mathcal{P}_\mathcal{F}}(p) \cdot r_\mathcal{F}^* \left(C - c(p)\right)$$
-          <p>
-            We prove that selecting the path with the highest individual ratio is equivalent to using the global maximum ratio $r_\mathcal{F}^*$ for extrapolation, so the optimal path can be determined <em>without</em> precomputing $r_\mathcal{F}^*$.
-          </p>
+                  <!-- Frontier boundary (curved) -->
+                  <path d="M5,204 C120,188 175,218 240,200 C305,182 395,214 475,200" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="8,5" fill="none"/>
+
+                  <!-- Region labels -->
+                  <text x="12" y="20" font-size="10.5" fill="#6b7280" font-style="italic" opacity="0.85">Known region</text>
+                  <text x="12" y="252" font-size="10.5" fill="#92400e" font-style="italic" opacity="0.85">Unknown territory</text>
+
+                  <!-- Unknown territory markers -->
+                  <text x="365" y="230" font-size="22" fill="#d97706" opacity="0.28" text-anchor="middle">?</text>
+                  <text x="432" y="250" font-size="16" fill="#d97706" opacity="0.22" text-anchor="middle">?</text>
+                  <text x="325" y="257" font-size="14" fill="#d97706" opacity="0.20" text-anchor="middle">?</text>
+                  <circle cx="400" cy="267" r="2.5" fill="#d97706" opacity="0.22"/>
+                  <circle cx="447" cy="257" r="2" fill="#d97706" opacity="0.18"/>
+                  <circle cx="358" cy="272" r="2" fill="#d97706" opacity="0.18"/>
+
+                  <!-- Background edges (grey) -->
+                  <line x1="110" y1="135" x2="215" y2="95" stroke="#b0b8c8" stroke-width="2" marker-end="url(#eg-arr)"/>
+                  <line x1="110" y1="154" x2="215" y2="191" stroke="#b0b8c8" stroke-width="2" marker-end="url(#eg-arr)"/>
+                  <line x1="267" y1="85" x2="363" y2="85" stroke="#b0b8c8" stroke-width="2" marker-end="url(#eg-arr)"/>
+
+                  <!-- Path highlight overlays (JS-controlled) -->
+                  <line id="eg-path-01" x1="110" y1="135" x2="215" y2="95" stroke="transparent" stroke-width="5" stroke-linecap="round" class="eg-path-hl"/>
+                  <line id="eg-path-02" x1="110" y1="154" x2="215" y2="191" stroke="transparent" stroke-width="5" stroke-linecap="round" class="eg-path-hl"/>
+                  <line id="eg-path-13" x1="267" y1="85" x2="363" y2="85" stroke="transparent" stroke-width="5" stroke-linecap="round" class="eg-path-hl"/>
+
+                  <!-- Edge cost labels -->
+                  <text x="148" y="106" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
+                  <text x="128" y="194" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
+                  <text x="315" y="73" font-size="11" fill="#64748b" text-anchor="middle">c=1</text>
+
+                  <!-- v0 (Start) -->
+                  <circle cx="85" cy="145" r="27" fill="#e0e7ff" stroke="#4338ca" stroke-width="2.5"/>
+                  <text x="85" y="141" font-size="11" fill="#312e81" text-anchor="middle" font-weight="600">v&#x2080;</text>
+                  <text x="85" y="155" font-size="9.5" fill="#4338ca" text-anchor="middle">Start</text>
+
+                  <!-- v1 (non-frontier, gain=4) -->
+                  <circle cx="240" cy="85" r="27" fill="#f3f4f6" stroke="#6b7280" stroke-width="2.5"/>
+                  <text x="240" y="81" font-size="11" fill="#374151" text-anchor="middle" font-weight="600">v&#x2081;</text>
+                  <text x="240" y="95" font-size="11" fill="#374151" text-anchor="middle">g=4</text>
+
+                  <!-- v2 (FRONTIER — center sits exactly on the boundary line) -->
+                  <circle cx="240" cy="200" r="27" fill="#fffbeb" stroke="#d97706" stroke-width="2.5" stroke-dasharray="6,3"/>
+                  <text x="240" y="196" font-size="11" fill="#78350f" text-anchor="middle" font-weight="600">v&#x2082;</text>
+                  <text x="240" y="210" font-size="11" fill="#d97706" text-anchor="middle">g=2</text>
+
+                  <!-- v3 (non-frontier, gain=3) -->
+                  <circle cx="390" cy="85" r="27" fill="#f3f4f6" stroke="#6b7280" stroke-width="2.5"/>
+                  <text x="390" y="81" font-size="11" fill="#374151" text-anchor="middle" font-weight="600">v&#x2083;</text>
+                  <text x="390" y="95" font-size="11" fill="#374151" text-anchor="middle">g=3</text>
+
+                  <!-- Legend bar -->
+                  <rect x="0" y="277" width="480" height="28" fill="#f1f5f9" rx="4"/>
+                  <circle cx="18" cy="291" r="7" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+                  <text x="29" y="295" font-size="9.5" fill="#374151">Non-frontier node</text>
+                  <circle cx="135" cy="291" r="7" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
+                  <text x="146" y="295" font-size="9.5" fill="#374151">Frontier node</text>
+                  <rect id="eg-legend-path" x="358" y="288" width="18" height="4" rx="2" fill="#2563eb"/>
+                  <text x="380" y="295" font-size="9.5" fill="#374151">Selected path</text>
+                </svg>
+              </div>
+
+              <!-- Controls column -->
+              <div class="column is-half">
+                <!-- Budget slider -->
+                <div class="field mb-3">
+                  <label class="label is-small mb-1" style="font-size:13px">
+                    Budget&ensp;<em>C</em>&nbsp;=&nbsp;<span id="eg-bval" style="font-weight:800;font-size:1.25em;color:#4338ca">4</span>
+                  </label>
+                  <input type="range" id="eg-slider" min="1" max="7" value="4" step="1"
+                         style="width:100%;accent-color:#4338ca;cursor:pointer">
+                  <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;margin-top:1px">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                  </div>
+                </div>
+
+                <!-- Criterion buttons -->
+                <div class="field mb-3">
+                  <label class="label is-small mb-1" style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">Selection Criterion</label>
+                  <div style="display:flex;gap:4px">
+                    <button class="eg-crit-btn" data-crit="gain"
+                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                      Path Gain
+                    </button>
+                    <button class="eg-crit-btn" data-crit="ratio"
+                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                      Path Ratio
+                    </button>
+                    <button class="eg-crit-btn" data-crit="expected"
+                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                      Expected Gain
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Score table -->
+                <table class="table is-narrow is-bordered" style="width:100%;font-size:11.5px;margin-bottom:8px;table-layout:fixed">
+                  <thead>
+                    <tr style="background:#f8fafc">
+                      <th style="padding:4px 7px;width:36%">Path</th>
+                      <th style="padding:4px 7px;text-align:center;width:12%">g(p)</th>
+                      <th style="padding:4px 7px;text-align:center;width:12%">c(p)</th>
+                      <th style="padding:4px 7px;text-align:center;width:40%">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="eg-tbody"></tbody>
+                </table>
+
+                <!-- Criterion formula / hint -->
+                <div id="eg-fbox" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:9px 12px;font-size:11.5px;line-height:1.6"></div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -892,6 +990,154 @@ function attachPairSync(real, rviz) {
     }
   });
 }
+</script>
+
+<script>
+(function () {
+  var NODES = [
+    { gain: 0, frontier: false },  // v0 start
+    { gain: 4, frontier: false },  // v1
+    { gain: 2, frontier: true  },  // v2
+    { gain: 3, frontier: false },  // v3
+  ];
+  var EDGES = [
+    { from: 0, to: 1, cost: 1 },
+    { from: 0, to: 2, cost: 1 },
+    { from: 1, to: 3, cost: 1 },
+  ];
+  var PATHS = [
+    { nodes: [0,1],   label: 'v\u2080\u2192v\u2081',                  edges: ['eg-path-01'] },
+    { nodes: [0,2],   label: 'v\u2080\u2192v\u2082\u2605',            edges: ['eg-path-02'] },
+    { nodes: [0,1,3], label: 'v\u2080\u2192v\u2081\u2192v\u2083',     edges: ['eg-path-01','eg-path-13'] },
+  ];
+
+  function pGain(p) {
+    return p.nodes.reduce(function(s, id) { return s + NODES[id].gain; }, 0);
+  }
+  function pCost(p) {
+    var c = 0;
+    for (var i = 0; i < p.nodes.length - 1; i++) {
+      var a = p.nodes[i], b = p.nodes[i + 1];
+      EDGES.forEach(function(e) { if (e.from === a && e.to === b) c += e.cost; });
+    }
+    return c;
+  }
+  function isFrontier(p) { return NODES[p.nodes[p.nodes.length - 1]].frontier; }
+  function score(p, crit, C) {
+    var g = pGain(p), c = pCost(p);
+    if (c > C) return null;
+    if (crit === 'gain') return g;
+    if (crit === 'ratio') return c > 0 ? g / c : 0;
+    return isFrontier(p) ? (g / c) * C : g;
+  }
+
+  var COLORS = { gain: '#2563eb', ratio: '#2563eb', expected: '#2563eb' };
+  var STYLES = {
+    gain:     { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
+    ratio:    { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
+    expected: { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
+  };
+  var FORMULAS = {
+    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; maximizes accumulated gain. Good for exploitation, but treats all paths the same regardless of whether budget remains for further exploration.',
+    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b style="color:#dc2626">Flaw:</b> v\u2080\u2192v\u2081 has ratio&thinsp;4 and always wins regardless of budget &mdash; even when extra budget allows reaching better paths.',
+    expected: '<b>Expected Gain (ours):</b> frontier paths (\u2605) score as $r(p)\\cdot C$, extrapolating their ratio over the full budget. Try sliding $C$ from 3 to 4: v\u2080\u2192v\u2082\u2605 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083!',
+  };
+
+  var activeCrit = 'gain';
+
+  function setActive(crit) {
+    activeCrit = crit;
+    var col = COLORS[crit];
+    document.querySelectorAll('.eg-crit-btn').forEach(function(b) {
+      if (b.getAttribute('data-crit') === crit) {
+        var s = STYLES[crit];
+        b.style.background = s.bg; b.style.borderColor = s.border;
+        b.style.color = s.color; b.style.fontWeight = '700';
+      } else {
+        b.style.background = '#f9fafb'; b.style.borderColor = '#d1d5db';
+        b.style.color = '#374151'; b.style.fontWeight = '400';
+      }
+    });
+    var bval = document.getElementById('eg-bval');
+    if (bval) bval.style.color = col;
+    var slider = document.getElementById('eg-slider');
+    if (slider) slider.style.accentColor = col;
+    var fbox = document.getElementById('eg-fbox');
+    if (fbox) fbox.style.borderColor = col;
+    var lpath = document.getElementById('eg-legend-path');
+    if (lpath) lpath.setAttribute('fill', col);
+  }
+
+  function update() {
+    var C = parseInt(document.getElementById('eg-slider').value);
+    document.getElementById('eg-bval').textContent = C;
+
+    var results = PATHS.map(function(p) {
+      return { p: p, g: pGain(p), c: pCost(p), s: score(p, activeCrit, C), front: isFrontier(p) };
+    });
+
+    var bestIdx = -1, bestS = -Infinity;
+    results.forEach(function(r, i) {
+      if (r.s !== null && r.s > bestS) { bestS = r.s; bestIdx = i; }
+    });
+
+    ['eg-path-01','eg-path-02','eg-path-13'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute('stroke', 'transparent');
+    });
+    var col = COLORS[activeCrit];
+    if (bestIdx >= 0) {
+      PATHS[bestIdx].edges.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.setAttribute('stroke', col);
+      });
+    }
+
+    var tbody = document.getElementById('eg-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    results.forEach(function(r, i) {
+      var tr = document.createElement('tr');
+      var best = i === bestIdx;
+      if (best) { tr.style.background = col + '18'; tr.style.fontWeight = '600'; }
+      var scoreStr;
+      if (r.s === null) {
+        scoreStr = '<span style="color:#9ca3af;font-style:italic">over budget</span>';
+      } else {
+        var val = Math.round(r.s * 10) / 10;
+        if (activeCrit === 'expected' && r.front && r.c > 0) {
+          var rat = Math.round((r.g / r.c) * 10) / 10;
+          scoreStr = rat + '\u00d7' + C + '\u202f=\u202f' + val;
+        } else {
+          scoreStr = '' + val;
+        }
+        if (best) scoreStr = '<b>' + scoreStr + ' \u2713</b>';
+      }
+      tr.innerHTML = '<td style="padding:4px 7px">' + r.p.label + '</td>' +
+                     '<td style="padding:4px 7px;text-align:center">' + r.g + '</td>' +
+                     '<td style="padding:4px 7px;text-align:center">' + r.c + '</td>' +
+                     '<td style="padding:4px 7px;text-align:center">' + scoreStr + '</td>';
+      tbody.appendChild(tr);
+    });
+
+    var fbox = document.getElementById('eg-fbox');
+    if (fbox) {
+      fbox.innerHTML = FORMULAS[activeCrit];
+      if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([fbox]).catch(function() {});
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var slider = document.getElementById('eg-slider');
+    if (!slider) return;
+    slider.addEventListener('input', update);
+    document.querySelectorAll('.eg-crit-btn').forEach(function(b) {
+      b.addEventListener('click', function() { setActive(b.getAttribute('data-crit')); update(); });
+    });
+    setActive('gain');
+    update();
+  });
+})();
 </script>
 
 </body>
