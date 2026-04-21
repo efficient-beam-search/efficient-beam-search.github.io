@@ -524,8 +524,112 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Expected Gain: Balancing Exploration and Exploitation</h3>
-        <div class="content has-text-centered">
-          <img src="./static/images/expected_gain_illustration.png" alt="Expected gain illustration">
+        <div class="content">
+          <div class="box expected-gain-demo" id="expected-gain-demo">
+            <p class="has-text-weight-semibold mb-3">Interactive graph example (click frontier candidates to toggle):</p>
+            <div class="columns is-variable is-4 expected-gain-layout">
+              <div class="column is-two-thirds-desktop">
+                <div class="expected-gain-graph-wrapper">
+                  <svg class="expected-gain-graph" viewBox="0 0 700 350" role="img" aria-label="Graph with frontier nodes and candidate paths">
+                    <defs>
+                      <marker id="eg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                      </marker>
+                    </defs>
+
+                    <line id="eg-edge-S-A" x1="80" y1="175" x2="190" y2="95"></line>
+                    <line id="eg-edge-S-B" x1="80" y1="175" x2="190" y2="255"></line>
+                    <line id="eg-edge-A-C" x1="190" y1="95" x2="320" y2="95"></line>
+                    <line id="eg-edge-B-D" x1="190" y1="255" x2="330" y2="210"></line>
+                    <line id="eg-edge-B-E" x1="190" y1="255" x2="320" y2="295"></line>
+                    <line id="eg-edge-C-F1" x1="320" y1="95" x2="470" y2="95"></line>
+                    <line id="eg-edge-E-F2" x1="320" y1="295" x2="470" y2="295"></line>
+
+                    <text class="eg-edge-cost" x="132" y="126" text-anchor="middle">c=12</text>
+                    <text class="eg-edge-cost" x="132" y="243" text-anchor="middle">c=10</text>
+                    <text class="eg-edge-cost" x="256" y="83" text-anchor="middle">c=14</text>
+                    <text class="eg-edge-cost" x="262" y="222" text-anchor="middle">c=16</text>
+                    <text class="eg-edge-cost" x="257" y="289" text-anchor="middle">c=11</text>
+                    <text class="eg-edge-cost" x="395" y="83" text-anchor="middle">c=12</text>
+                    <text class="eg-edge-cost" x="395" y="283" text-anchor="middle">c=15</text>
+
+                    <g class="eg-node" data-node="S" transform="translate(80,175)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">S</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=0</text>
+                    </g>
+                    <g class="eg-node" data-node="A" transform="translate(190,95)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">A</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=16</text>
+                    </g>
+                    <g class="eg-node" data-node="B" transform="translate(190,255)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">B</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=10</text>
+                    </g>
+                    <g class="eg-node" data-node="C" transform="translate(320,95)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">C</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=18</text>
+                    </g>
+                    <g class="eg-node" data-node="D" transform="translate(330,210)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">D</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=22</text>
+                    </g>
+                    <g class="eg-node" data-node="E" transform="translate(320,295)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">E</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=14</text>
+                    </g>
+                    <g class="eg-node eg-frontier-candidate" data-node="F1" transform="translate(470,95)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">F1</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=8</text>
+                    </g>
+                    <g class="eg-node eg-frontier-candidate" data-node="F2" transform="translate(470,295)">
+                      <circle></circle>
+                      <text class="eg-node-name" y="2" text-anchor="middle">F2</text>
+                      <text class="eg-node-gain" y="17" text-anchor="middle">g=20</text>
+                    </g>
+                  </svg>
+                </div>
+                <p class="is-size-7 has-text-grey mt-2 mb-0">
+                  Edges are directed. Frontier candidates are F1 and F2 (click to toggle frontier status).
+                </p>
+              </div>
+
+              <div class="column is-one-third-desktop">
+                <div class="expected-gain-controls">
+                  <label class="label mb-2" for="eg-budget-slider">Budget $C$: <span id="eg-budget-value">70</span></label>
+                  <input id="eg-budget-slider" class="slider is-fullwidth" step="5" min="30" max="120" value="70" type="range">
+
+                  <p class="label mt-4 mb-2">Highlight winner by criterion</p>
+                  <div class="buttons are-small expected-gain-criterion-buttons" id="eg-criterion-buttons">
+                    <button class="button is-info is-selected" data-criterion="gain" type="button">Path Gain</button>
+                    <button class="button" data-criterion="ratio" type="button">Path Ratio</button>
+                    <button class="button" data-criterion="expected" type="button">Expected Gain</button>
+                  </div>
+
+                  <p class="expected-gain-best mt-3 mb-3" id="eg-best-path"></p>
+                  <div class="table-container">
+                    <table class="table is-fullwidth is-striped is-hoverable expected-gain-table">
+                      <thead>
+                        <tr>
+                          <th>Path</th>
+                          <th>$g(p)$</th>
+                          <th>$r(p)$</th>
+                          <th>$g_e(p)$</th>
+                        </tr>
+                      </thead>
+                      <tbody id="eg-score-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="content has-text-justified">
           <p>

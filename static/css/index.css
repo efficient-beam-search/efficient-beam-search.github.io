@@ -199,3 +199,101 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+.expected-gain-demo {
+  border: 1px solid #dbe6ef;
+  background: linear-gradient(180deg, #f9fcff 0%, #ffffff 100%);
+}
+
+.expected-gain-layout {
+  align-items: flex-start;
+}
+
+.expected-gain-graph-wrapper {
+  border: 1px solid #d9e4ed;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0.5rem;
+}
+
+.expected-gain-graph {
+  width: 100%;
+  height: auto;
+}
+
+.expected-gain-graph line {
+  stroke: #adc1d4;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.expected-gain-graph line.eg-path-active {
+  stroke: #1f80d6;
+  stroke-width: 7;
+}
+
+.eg-node {
+  cursor: default;
+}
+
+.eg-node circle {
+  r: 21;
+  fill: #ffffff;
+  stroke: #8aa7c2;
+  stroke-width: 3;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.eg-node text {
+  font-size: 14px;
+  font-weight: 700;
+  fill: #35506b;
+  user-select: none;
+}
+
+.eg-node.eg-frontier-active circle {
+  fill: #e4f2ff;
+  stroke: #2e88da;
+}
+
+.eg-frontier-candidate {
+  cursor: pointer;
+}
+
+.eg-frontier-candidate circle {
+  stroke-dasharray: 5 4;
+}
+
+.expected-gain-controls {
+  border: 1px solid #d9e4ed;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0.9rem;
+}
+
+.expected-gain-criterion-buttons .button.is-selected {
+  background-color: hsl(204, 86%, 53%);
+  border-color: hsl(204, 86%, 53%);
+  color: #fff;
+}
+
+.expected-gain-best {
+  font-weight: 700;
+  color: #1d4f81;
+}
+
+.expected-gain-table td,
+.expected-gain-table th {
+  font-size: 0.86rem;
+}
+
+.expected-gain-table tr.is-winner {
+  background: #eaf4fe !important;
+}
+
+@media screen and (max-width: 768px) {
+  .expected-gain-graph-wrapper {
+    padding: 0.35rem;
+  }
+}
