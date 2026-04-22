@@ -5,108 +5,101 @@
     </marker>
   </defs>
 
-  <!-- Perception circle: always visible, follows robot -->
+  <!-- Perception circle: follows robot -->
   <circle r="100" fill="hsl(204,86%,96%)" fill-opacity="0.25"
           stroke="hsl(204,86%,75%)" stroke-width="1.5" stroke-dasharray="5,4">
-    <animate attributeName="cx" values="28;28;100;100;125;125;125;28;28"
-             keyTimes="0;0.19;0.28;0.49;0.57;0.66;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="110;110;55;55;88;88;88;110;110"
-             keyTimes="0;0.19;0.28;0.49;0.57;0.66;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;1"
-         keyTimes="0;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="28;28;100;100;125;125;28;28"
+             keyTimes="0;0.25;0.38;0.58;0.71;0.96;0.97;1" dur="12s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="110;110;55;55;88;88;110;110"
+             keyTimes="0;0.25;0.38;0.58;0.71;0.96;0.97;1" dur="12s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- Obstacle: barely visible initially, discovered when robot reaches node 1 -->
+  <!-- Obstacle: barely visible, revealed in phase 3 (with node 5) -->
   <g opacity="0.07">
     <animate attributeName="opacity" values="0.07;0.07;0.85;0.85"
-             keyTimes="0;0.30;0.34;1" dur="10s" repeatCount="indefinite"/>
+             keyTimes="0;0.38;0.41;1" dur="12s" repeatCount="indefinite"/>
     <polygon points="105,18 150,14 168,42 156,66 125,58 108,34"
              fill="#e0e0e0" stroke="#bbb" stroke-width="1.5" stroke-linejoin="round"/>
     <text x="138" y="42" text-anchor="middle" font-size="7" fill="#aaa" font-family="sans-serif">obstacle</text>
   </g>
 
-  <!-- Phase 1 edges (boundary-to-boundary so arrows land at node borders) -->
-  <!-- S(28,110,r=8) → 1(100,55,r=7) -->
+  <!-- Phase 1 (t=0.5–1.5s): node 4 (100,55) discovered → edge S→node4 -->
   <line x1="34" y1="105" x2="94" y2="59" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.06;0.08;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.04;0.08;1" dur="12s" repeatCount="indefinite"/>
   </line>
-  <!-- S(28,110,r=8) → 2(50,82,r=7) -->
+
+  <!-- Phase 2: node 3 (50,82) discovered → edges S→node3, node4→node3 -->
   <line x1="33" y1="104" x2="46" y2="88" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.08;0.10;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.09;0.13;1" dur="12s" repeatCount="indefinite"/>
   </line>
-  <!-- 1(100,55,r=7) → 2(50,82,r=7) -->
   <line x1="94" y1="58" x2="56" y2="79" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.10;0.12;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.09;0.13;1" dur="12s" repeatCount="indefinite"/>
   </line>
 
-  <!-- Phase 2 edges (appear after obstacle discovery at node 1) -->
-  <!-- 1(100,55,r=7) → 3(125,88,r=7) -->
+  <!-- Phase 3 (after obstacle): node 5 (125,88) discovered → edges node4→node5, node3→node5 -->
   <line x1="104" y1="61" x2="121" y2="82" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.36;0.38;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.43;0.47;1" dur="12s" repeatCount="indefinite"/>
   </line>
-  <!-- 3(125,88,r=7) → 4(168,116,r=7) -->
-  <line x1="131" y1="92" x2="162" y2="112" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.39;0.41;1" dur="10s" repeatCount="indefinite"/>
-  </line>
-  <!-- 2(50,82,r=7) → 3(125,88,r=7) -->
   <line x1="57" y1="83" x2="118" y2="87" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.41;0.43;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.43;0.47;1" dur="12s" repeatCount="indefinite"/>
   </line>
 
-  <!-- Blue path 1: S → 1 → 2 (robot follows up to node 1 then stops) -->
+  <!-- Phase 4: node 2 (168,116) discovered → edge node5→node2 -->
+  <line x1="131" y1="92" x2="162" y2="112" stroke="#ddd" stroke-width="1.5" marker-end="url(#pf-ap-a)" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="12s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Blue path 1: S→node4→node3 (initial plan, appears after phase 2, gone when replanned) -->
   <path d="M28,110 L100,55 L50,82" fill="none" stroke="hsl(204,86%,53%)" stroke-width="2.5" stroke-linecap="round" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.14;0.16;0.44;0.46;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.14;0.18;0.53;0.57;1" dur="12s" repeatCount="indefinite"/>
   </path>
 
-  <!-- Blue path 2: 1 → 3 → 4 (replanned, routes below obstacle) -->
+  <!-- Blue path 2: node4→node5→node2 (replanned after obstacle) -->
   <path d="M100,55 L125,88 L168,116" fill="none" stroke="hsl(204,86%,53%)" stroke-width="2.5" stroke-linecap="round" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.46;0.48;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.53;0.57;1" dur="12s" repeatCount="indefinite"/>
   </path>
 
-  <!-- Phase 1 nodes -->
+  <!-- Phase 1 node: node 4 (100,55) -->
   <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.06;0.08;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.04;0.08;1" dur="12s" repeatCount="indefinite"/>
     <circle cx="100" cy="55" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="100" y="58" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">4</text>
   </g>
+  <!-- Phase 2 node: node 3 (50,82) -->
   <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.08;0.10;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.09;0.13;1" dur="12s" repeatCount="indefinite"/>
     <circle cx="50" cy="82" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="50" y="85" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">3</text>
   </g>
-
-  <!-- Phase 2 nodes -->
+  <!-- Phase 3 node: node 5 (125,88) — after obstacle -->
   <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.36;0.38;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.43;0.47;1" dur="12s" repeatCount="indefinite"/>
     <circle cx="125" cy="88" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="125" y="91" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">5</text>
   </g>
+  <!-- Phase 4 node: node 2 (168,116) -->
   <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.39;0.41;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.52;1" dur="12s" repeatCount="indefinite"/>
     <circle cx="168" cy="116" r="7" fill="#e8f4fd" stroke="#666" stroke-width="1.5"/>
     <text x="168" y="119" text-anchor="middle" font-size="8" font-weight="bold" fill="#333" font-family="sans-serif">2</text>
   </g>
 
-  <!-- Start node -->
-  <g>
-    <animate attributeName="opacity" values="1;1" keyTimes="0;1" dur="10s" repeatCount="indefinite"/>
-    <circle cx="28" cy="110" r="8" fill="#fff" stroke="#666" stroke-width="2"/>
-    <text x="28" y="114" text-anchor="middle" font-size="9" font-weight="bold" fill="#333" font-family="sans-serif">0</text>
-    <text x="28" y="128" text-anchor="middle" font-size="8" fill="#999" font-family="sans-serif" font-style="italic">start</text>
-    <text x="100" y="134" text-anchor="middle" font-size="8" fill="#aaa" font-family="sans-serif">node label = gain</text>
-  </g>
+  <!-- Start node (always visible) -->
+  <circle cx="28" cy="110" r="8" fill="#fff" stroke="#666" stroke-width="2"/>
+  <text x="28" y="114" text-anchor="middle" font-size="9" font-weight="bold" fill="#333" font-family="sans-serif">0</text>
+  <text x="28" y="128" text-anchor="middle" font-size="8" fill="#999" font-family="sans-serif" font-style="italic">start</text>
+  <text x="100" y="134" text-anchor="middle" font-size="8" fill="#aaa" font-family="sans-serif">node label = gain</text>
 
   <!-- Robot dot -->
   <circle r="5" fill="hsl(204,86%,53%)" stroke="#fff" stroke-width="1.5">
-    <animate attributeName="cx" values="28;28;100;100;125;125;125;28;28"
-             keyTimes="0;0.19;0.28;0.49;0.57;0.66;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="110;110;55;55;88;88;88;110;110"
-             keyTimes="0;0.19;0.28;0.49;0.57;0.66;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;1" keyTimes="0;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="28;28;100;100;125;125;28;28"
+             keyTimes="0;0.25;0.38;0.58;0.71;0.96;0.97;1" dur="12s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="110;110;55;55;88;88;110;110"
+             keyTimes="0;0.25;0.38;0.58;0.71;0.96;0.97;1" dur="12s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- Single end-stage decay: one shape takes over the full scene -->
+  <!-- White fade -->
   <circle cx="100" cy="70" r="170" fill="#fff" opacity="0">
-    <animate attributeName="opacity" values="0;0;1.02;1.0" keyTimes="0;0.74;0.85;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1.02;1.0" keyTimes="0;0.88;0.96;1" dur="12s" repeatCount="indefinite"/>
   </circle>
 </svg>
