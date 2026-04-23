@@ -155,10 +155,11 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./static/images/Pipeline.jpg" alt="Surface reconstruction pipeline">
+      <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+        <source src="./static/videos/ijrr-teaser-cut.mp4" type="video/mp4">
+      </video>
       <h2 class="subtitle has-text-centered">
-        NBS autonomously navigates a robot through cluttered environments, reconstructing surfaces
-        by balancing exploration of unknown regions with exploitation of known informative viewpoints.
+        TODO.
       </h2>
     </div>
   </div>
@@ -418,98 +419,6 @@
 
     <h2 class="title is-3 has-text-centered">Method Overview</h2>
 
-    <!-- NBS Algorithm -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title is-4">Node-wise Beam Search (NBS)</h3>
-        <div class="content has-text-justified">
-          <p>
-            <b>Motivation.</b> Depth-wise beam search (DBS) maintains the top $B$ paths at each search depth, but this makes it prone to local optima&mdash;once the entire beam converges on regions with high immediate gains, it neglects other promising candidates. In the worst case, all $B$ paths in the beam may terminate at the same node.
-          </p>
-          <p>
-            <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This ensures that at least one promising path remains available at every visited node, encouraging exploration across the graph rather than focusing on immediate high-gain regions.
-          </p>
-        </div>
-
-        <!-- Algorithm pseudocode -->
-        <div class="content">
-          <div class="box">
-            <p class="title is-6"><b>Algorithm: Node-wise Beam Search (NBS)</b></p>
-            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$<br>
-            <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$</p>
-            <hr>
-            <ol>
-              <li>Initialize best path $p^* \leftarrow (v_s)$, per-node beam $\textbf{open}[v_s] \leftarrow \{(v_s)\}$</li>
-              <li><b>for</b> depth $d = 1$ to $D$ <b>do</b>
-                <ol type="a">
-                  <li>Initialize empty per-node heap $\textbf{heap}$</li>
-                  <li><b>for each</b> node $v \in \mathcal{V}$ with $\textbf{open}[v] \neq \emptyset$ <b>do</b>
-                    <ol type="i">
-                      <li><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b>
-                        <ol>
-                          <li><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b>
-                            <ul>
-                              <li>Extend: $p' \leftarrow p + (v, v')$</li>
-                              <li><b>if</b> $c(p') > C$: skip (budget exceeded)</li>
-                              <li><b>if</b> $q(p') > q(p^*)$: update $p^* \leftarrow p'$</li>
-                              <li>Insert $p'$ into $\textbf{heap}[v']$, keeping only top-$B$ paths per node</li>
-                            </ul>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>$\textbf{open} \leftarrow \textbf{heap}$</li>
-                </ol>
-              </li>
-              <li><b>return</b> $p^*$</li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="content has-text-justified">
-          <p>
-            <b>Complexity.</b> NBS has time complexity $O(|\mathcal{E}|\,D\,B\,(D + \log B))$ and space complexity $O(|\mathcal{V}|\,D\,B)$. Even at beam width $B=1$, NBS delivers strong and robust performance due to its per-node diversity guarantee.
-          </p>
-        </div>
-
-        <!-- Complexity comparison table -->
-        <!-- <div class="content">
-          <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-            <thead>
-              <tr>
-                <th>Algorithm</th>
-                <th>Time Complexity</th>
-                <th>Space Complexity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TSP</td>
-                <td>$\Omega(|\mathcal{V}|^3),\; O(|\mathcal{V}|^2 \, 2^{|\mathcal{V}|})$</td>
-                <td>$\Omega(|\mathcal{V}|^2),\; O(|\mathcal{V}| \, 2^{|\mathcal{V}|})$</td>
-              </tr>
-              <tr>
-                <td>SPT</td>
-                <td>$O(|\mathcal{V}||\mathcal{E}|)$</td>
-                <td>$O(|\mathcal{V}|)$</td>
-              </tr>
-              <tr>
-                <td>DBS</td>
-                <td>$O(|\mathcal{V}|\,D\,B\,(D + \log B))$</td>
-                <td>$O(D\,B)$</td>
-              </tr>
-              <tr class="has-background-success-light">
-                <td><b>NBS (ours)</b></td>
-                <td>$O(|\mathcal{E}|\,D\,B\,(D + \log B))$</td>
-                <td>$O(|\mathcal{V}|\,D\,B)$</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
-      </div>
-    </div>
-
     <!-- Expected Gain -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -658,6 +567,98 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- NBS Algorithm -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Node-wise Beam Search (NBS)</h3>
+        <div class="content has-text-justified">
+          <p>
+            <b>Motivation.</b> Depth-wise beam search (DBS) maintains the top $B$ paths at each search depth, but this makes it prone to local optima&mdash;once the entire beam converges on regions with high immediate gains, it neglects other promising candidates. In the worst case, all $B$ paths in the beam may terminate at the same node.
+          </p>
+          <p>
+            <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This ensures that at least one promising path remains available at every visited node, encouraging exploration across the graph rather than focusing on immediate high-gain regions.
+          </p>
+        </div>
+
+        <!-- Algorithm pseudocode -->
+        <div class="content">
+          <div class="box">
+            <p class="title is-6"><b>Algorithm: Node-wise Beam Search (NBS)</b></p>
+            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$<br>
+            <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$</p>
+            <hr>
+            <ol>
+              <li>Initialize best path $p^* \leftarrow (v_s)$, per-node beam $\textbf{open}[v_s] \leftarrow \{(v_s)\}$</li>
+              <li><b>for</b> depth $d = 1$ to $D$ <b>do</b>
+                <ol type="a">
+                  <li>Initialize empty per-node heap $\textbf{heap}$</li>
+                  <li><b>for each</b> node $v \in \mathcal{V}$ with $\textbf{open}[v] \neq \emptyset$ <b>do</b>
+                    <ol type="i">
+                      <li><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b>
+                        <ol>
+                          <li><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b>
+                            <ul>
+                              <li>Extend: $p' \leftarrow p + (v, v')$</li>
+                              <li><b>if</b> $c(p') > C$: skip (budget exceeded)</li>
+                              <li><b>if</b> $q(p') > q(p^*)$: update $p^* \leftarrow p'$</li>
+                              <li>Insert $p'$ into $\textbf{heap}[v']$, keeping only top-$B$ paths per node</li>
+                            </ul>
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>$\textbf{open} \leftarrow \textbf{heap}$</li>
+                </ol>
+              </li>
+              <li><b>return</b> $p^*$</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>Complexity.</b> NBS has time complexity $O(|\mathcal{E}|\,D\,B\,(D + \log B))$ and space complexity $O(|\mathcal{V}|\,D\,B)$. Even at beam width $B=1$, NBS delivers strong and robust performance due to its per-node diversity guarantee.
+          </p>
+        </div>
+
+        <!-- Complexity comparison table -->
+        <!-- <div class="content">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Time Complexity</th>
+                <th>Space Complexity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TSP</td>
+                <td>$\Omega(|\mathcal{V}|^3),\; O(|\mathcal{V}|^2 \, 2^{|\mathcal{V}|})$</td>
+                <td>$\Omega(|\mathcal{V}|^2),\; O(|\mathcal{V}| \, 2^{|\mathcal{V}|})$</td>
+              </tr>
+              <tr>
+                <td>SPT</td>
+                <td>$O(|\mathcal{V}||\mathcal{E}|)$</td>
+                <td>$O(|\mathcal{V}|)$</td>
+              </tr>
+              <tr>
+                <td>DBS</td>
+                <td>$O(|\mathcal{V}|\,D\,B\,(D + \log B))$</td>
+                <td>$O(D\,B)$</td>
+              </tr>
+              <tr class="has-background-success-light">
+                <td><b>NBS (ours)</b></td>
+                <td>$O(|\mathcal{E}|\,D\,B\,(D + \log B))$</td>
+                <td>$O(|\mathcal{V}|\,D\,B)$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
       </div>
     </div>
 
