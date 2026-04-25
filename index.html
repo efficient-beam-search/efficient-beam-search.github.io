@@ -583,37 +583,34 @@
 
         <!-- Algorithm pseudocode -->
         <div class="content">
-          <div class="box has-background-light algo-box">
-            <p class="title is-6"><b>Algorithm: Node-wise Beam Search (NBS)</b></p>
-            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$, cost budget $C$<br>
-            <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$</p>
-            <hr>
-            <ol>
-              <li>Initialize best path $p^* \leftarrow (v_s)$, per-node beam $\textbf{open}[v_s] \leftarrow \{(v_s)\}$</li>
-              <li><b>for</b> depth $d = 1$ to $D$ <b>do</b>
-                <ol type="a">
-                  <li>Initialize empty per-node heap $\textbf{heap}$</li>
-                  <li><b>for each</b> node $v \in \mathcal{V}$ <b>do</b>
-                    <ol type="i">
-                      <li><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b>
-                        <ol>
-                          <li><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b>
-                            <ul>
-                              <li>Extend: $p' \leftarrow p + (v, v')$</li>
-                              <li><b>if</b> $c(p') > C$: skip (budget exceeded)</li>
-                              <li><b>if</b> $q(p') > q(p^*)$: update $p^* \leftarrow p'$</li>
-                              <li>Insert $p'$ into $\textbf{heap}[v']$, keeping only top-$B$ paths per node</li>
-                            </ul>
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>$\textbf{open} \leftarrow \textbf{heap}$</li>
-                </ol>
-              </li>
-              <li><b>return</b> $p^*$</li>
-            </ol>
+          <div class="algo-box">
+            <div class="algo-header">Algorithm: Node-wise Beam Search (NBS)</div>
+            <div class="algo-inputs">
+              <b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$, cost budget $C$<br>
+              <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$
+            </div>
+            <div class="algo-body">
+              <div class="algo-step">Initialize best path $p^* \leftarrow (v_s)$, per-node beam $\textbf{open}[v_s] \leftarrow \{(v_s)\}$</div>
+              <div class="algo-step"><b>for</b> depth $d = 1$ to $D$ <b>do</b></div>
+              <div class="algo-block">
+                <div class="algo-step">Initialize empty per-node heap $\textbf{heap}$</div>
+                <div class="algo-step"><b>for each</b> node $v \in \mathcal{V}$ <b>do</b></div>
+                <div class="algo-block">
+                  <div class="algo-step"><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b></div>
+                  <div class="algo-block">
+                    <div class="algo-step"><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b></div>
+                    <div class="algo-block">
+                      <div class="algo-step">Extend: $p' \leftarrow p + (v, v')$</div>
+                      <div class="algo-step"><b>if</b> $c(p') > C$: skip (budget exceeded)</div>
+                      <div class="algo-step"><b>if</b> $q(p') > q(p^*)$: update $p^* \leftarrow p'$</div>
+                      <div class="algo-step">Insert $p'$ into $\textbf{heap}[v']$, keeping only top-$B$ paths per node</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="algo-step">$\textbf{open} \leftarrow \textbf{heap}$</div>
+              </div>
+              <div class="algo-step"><b>return</b> $p^*$</div>
+            </div>
           </div>
         </div>
 
@@ -658,36 +655,33 @@
         </div>
 
         <!-- RRAG Algorithm -->
-        <div class="content">
-          <div class="box has-background-light algo-box">
-            <p class="title is-6"><b>Algorithm: RRAG Construction</b></p>
-            <p><b>Input:</b> Current graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</p>
-            <hr>
-            <ol>
-              <li><b>for</b> $i = 1$ to $n_{\text{new}}$ <b>do</b>
-                <ol type="a">
-                  <li>$v_{\text{new}} \leftarrow$ <code>SampleFree</code>()
-                    &nbsp; <span class="has-text-grey-light">[reject if within $l_{\min}$ of any existing node; relocate if beyond $l_{\max}$ from nearest]</span></li>
-                  <li><b>if</b> $v_{\text{new}}$ is invalid: <b>continue</b></li>
-                  <li>$v_{\text{nearest}} \leftarrow$ <code>Nearest</code>$(\mathcal{V}, v_{\text{new}})$</li>
-                  <li><b>if</b> <code>CollisionFree</code>$(v_{\text{nearest}}, v_{\text{new}})$ <b>then</b>
-                    <ol type="i">
-                      <li>$\mathcal{V}_{\text{near}} \leftarrow$ <code>Near</code>$(\mathcal{V}, v_{\text{new}}, l_{\max})$</li>
-                      <li><b>for each</b> $v_{\text{near}} \in \mathcal{V}_{\text{near}}$ <b>do</b>
-                        <ul>
-                          <li><b>if</b> <code>CollisionFree</code>$(v_{\text{near}}, v_{\text{new}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{near}}, v_{\text{new}})\}$</li>
-                          <li><b>if</b> <code>CollisionFree</code>$(v_{\text{new}}, v_{\text{near}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{new}}, v_{\text{near}})\}$</li>
-                        </ul>
-                      </li>
-                      <li>$\mathcal{V} \leftarrow \mathcal{V} \cup \{v_{\text{new}}\}$</li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-              <li><b>return</b> $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</li>
-            </ol>
+        <!-- <div class="content">
+          <div class="algo-box">
+            <div class="algo-header">Algorithm: RRAG Construction</div>
+            <div class="algo-inputs">
+              <b>Input:</b> Current graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$
+            </div>
+            <div class="algo-body">
+              <div class="algo-step"><b>for</b> $i = 1$ to $n_{\text{new}}$ <b>do</b></div>
+              <div class="algo-block">
+                <div class="algo-step">$v_{\text{new}} \leftarrow$ <code>SampleFree</code>() &nbsp;<span class="algo-comment">[reject if within $l_{\min}$ of any existing node; relocate if beyond $l_{\max}$ from nearest]</span></div>
+                <div class="algo-step"><b>if</b> $v_{\text{new}}$ is invalid: <b>continue</b></div>
+                <div class="algo-step">$v_{\text{nearest}} \leftarrow$ <code>Nearest</code>$(\mathcal{V}, v_{\text{new}})$</div>
+                <div class="algo-step"><b>if</b> <code>CollisionFree</code>$(v_{\text{nearest}}, v_{\text{new}})$ <b>then</b></div>
+                <div class="algo-block">
+                  <div class="algo-step">$\mathcal{V}_{\text{near}} \leftarrow$ <code>Near</code>$(\mathcal{V}, v_{\text{new}}, l_{\max})$</div>
+                  <div class="algo-step"><b>for each</b> $v_{\text{near}} \in \mathcal{V}_{\text{near}}$ <b>do</b></div>
+                  <div class="algo-block">
+                    <div class="algo-step"><b>if</b> <code>CollisionFree</code>$(v_{\text{near}}, v_{\text{new}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{near}}, v_{\text{new}})\}$</div>
+                    <div class="algo-step"><b>if</b> <code>CollisionFree</code>$(v_{\text{new}}, v_{\text{near}})$: $\mathcal{E} \leftarrow \mathcal{E} \cup \{(v_{\text{new}}, v_{\text{near}})\}$</div>
+                  </div>
+                  <div class="algo-step">$\mathcal{V} \leftarrow \mathcal{V} \cup \{v_{\text{new}}\}$</div>
+                </div>
+              </div>
+              <div class="algo-step"><b>return</b> $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</div>
+            </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -717,7 +711,8 @@
 
         <!-- Summary table -->
         <div class="content">
-            <table class="benchmark-table">
+          <div class="table-container benchmark-table-wrap">
+            <table class="table is-fullwidth benchmark-table">
               <thead>
                 <tr>
                   <th></th>
@@ -758,12 +753,13 @@
                 </tr>
               </tbody>
             </table>
-            <div class="benchmark-legend">
-              <span class="legend-label">Summary of algorithm performance across graph benchmarking experiments.</span>
-              <span class="legend-item cell-best">Best</span>
-              <span class="legend-item cell-good">Good</span>
-              <span class="legend-item cell-poor">Poor</span>
-            </div>
+          </div>
+          <div class="benchmark-legend">
+            <span class="legend-label">Summary of algorithm performance across graph benchmarking experiments.</span>
+            <span class="legend-item cell-best">Best</span>
+            <span class="legend-item cell-good">Good</span>
+            <span class="legend-item cell-poor">Poor</span>
+          </div>
         </div>
 
         <div class="content has-text-justified">
@@ -783,7 +779,11 @@
       <div class="column is-full-width">
         <h3 class="title is-4">Active Perception Performance</h3>
         <div class="content">
-          <canvas id="barplot-canvas"></canvas>
+          <div class="barplot-scroll">
+            <div class="barplot-frame">
+              <canvas id="barplot-canvas"></canvas>
+            </div>
+          </div>
         </div>
         <div class="content has-text-justified">
           <p>
@@ -1196,16 +1196,22 @@ function attachPairSync(real, rviz) {
     var el = document.getElementById('barplot-canvas');
     if (!el) return;
 
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
     new Chart(el, {
       type: 'bar',
       data: { labels: ALGORITHMS, datasets: datasets },
       options: {
         responsive: true,
-        aspectRatio: 3.0,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'bottom',
-            labels: { boxWidth: 13, padding: 18, font: { size: 12 } },
+            labels: {
+              boxWidth: isMobile ? 10 : 13,
+              padding: isMobile ? 10 : 18,
+              font: { size: isMobile ? 10 : 12 },
+            },
           },
           tooltip: {
             callbacks: {
@@ -1218,16 +1224,20 @@ function attachPairSync(real, rviz) {
         scales: {
           x: {
             grid: { display: false },
-            ticks: { font: { size: 12 } },
+            ticks: {
+              maxRotation: isMobile ? 45 : 0,
+              minRotation: 0,
+              font: { size: isMobile ? 10 : 12 },
+            },
           },
           y: {
             beginAtZero: true,
             max: 0.85,
-            ticks: { stepSize: 0.1, font: { size: 12 } },
+            ticks: { stepSize: 0.1, font: { size: isMobile ? 10 : 12 } },
             title: {
               display: true,
               text: 'Normalized gain',
-              font: { size: 12 },
+              font: { size: isMobile ? 10 : 12 },
             },
             grid: { color: 'rgba(0,0,0,0.06)' },
           },

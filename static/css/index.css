@@ -356,7 +356,70 @@ h3.title.is-4 {
 
 /* ── Algorithm pseudocode boxes ───────────────────────────── */
 .algo-box {
-  font-size: 0.9em;
+  font-size: 0.88em;
+  padding: 0 !important;
+  border: 1px solid #d1d5db;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.algo-header {
+  background: #f1f5f9;
+  border-bottom: 1.5px solid #cbd5e1;
+  padding: 0.55rem 1.1rem;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #1e293b;
+}
+
+.algo-inputs {
+  padding: 0.6rem 1.1rem 0.4rem;
+  font-size: 0.97em;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  line-height: 1.65;
+}
+
+.algo-body {
+  padding: 0.65rem 1.1rem 0.75rem;
+}
+
+/* Pseudocode lines */
+.algo-step {
+  line-height: 1.7;
+}
+
+/* Vertical-bar indentation blocks */
+.algo-block {
+  margin-left: 0.9em;
+  padding-left: 1em;
+  border-left: 1.5px solid #cbd5e1;
+}
+
+/* Function names */
+.algo-box code {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.93em;
+  font-variant: small-caps;
+  color: #1e293b;
+  background: none;
+  padding: 0;
+}
+
+/* Keywords */
+.algo-kw {
+  font-weight: 700;
+  font-variant: normal;
+}
+
+/* Comments / annotations */
+.algo-comment {
+  color: #9ca3af;
+  font-size: 0.92em;
 }
 
 /* ── Figure captions ──────────────────────────────────────── */
@@ -374,9 +437,16 @@ h3.title.is-4 {
 }
 
 /* ── Benchmarking results table ───────────────────────────── */
+.benchmark-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .benchmark-table {
   font-size: 0.93em;
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
 }
 
@@ -483,6 +553,50 @@ h3.title.is-4 {
 .benchmark-legend .legend-item.cell-poor {
   background: #fee2e2;
   color: #991b1b;
+}
+
+/* ── Active perception bar plot ───────────────────────────── */
+.barplot-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.barplot-frame {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.barplot-frame canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+  .benchmark-table {
+    font-size: 0.84em;
+    min-width: 520px;
+  }
+
+  .benchmark-table thead th,
+  .benchmark-table tbody td {
+    padding: 7px 9px;
+  }
+
+  .benchmark-legend {
+    justify-content: flex-start;
+  }
+
+  .benchmark-legend .legend-label {
+    width: 100%;
+  }
+
+  .barplot-frame {
+    min-width: 620px;
+    height: 360px;
+  }
 }
 
 /* ── Contribution overview cards ──────────────────────────── */
