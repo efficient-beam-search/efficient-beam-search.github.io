@@ -10,8 +10,6 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
-        rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
@@ -19,10 +17,6 @@
     <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <style>
-    .eg-path-hl { transition: stroke 0.22s ease; }
-  </style>
-
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' font-size='70' text-anchor='middle' dominant-baseline='central'>🤖</text></svg>">
 
   <!-- MathJax -->
@@ -35,6 +29,7 @@
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -52,7 +47,7 @@
     </a>
   </div>
   <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+    <div class="navbar-start">
       <a class="navbar-item" href="https://efficient-beam-search.github.io">
         <span class="icon">
             <i class="fas fa-home"></i>
@@ -98,7 +93,7 @@
           </div>
 
           <div class="is-size-5 publication-venue has-text-centered">
-            <span class="author-block"><i>International Journal of Robotics Research (IJRR)</i></span>
+            <span class="author-block"><i>Accepted to The International Journal of Robotics Research (IJRR)</i></span>
           </div>
 
           <div class="column has-text-centered">
@@ -140,7 +135,7 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span style="font-family: 'Michroma', sans-serif;">Code</span>
+                  <span>Code</span>
                 </a>
               </span>
             </div>
@@ -155,11 +150,11 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+      <video autoplay muted loop playsinline preload="metadata">
         <source src="./static/videos/ijrr-teaser-cut.mp4" type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        TODO.
+      Our method enables efficient active perception across diverse scenarios.
       </h2>
     </div>
   </div>
@@ -178,8 +173,8 @@
             Active perception is a fundamental problem in autonomous robotics in which the robot
             must decide where to move and what to sense in order to obtain the most informative
             observations for accomplishing its mission. Existing approaches either solve a
-            computationally expensive traveling salesman problem over heuristically selected
-            informative nodes, or adopt a more efficient but overly constrained shortest path tree
+            computationally expensive traveling salesman problem (TSP) over heuristically selected
+            informative nodes, or adopt a more efficient but overly constrained shortest path tree (SPT)
             formulation.
           </p>
           <p>
@@ -188,7 +183,7 @@
             at each depth level, it is prone to local optima and exhibits parameter sensitivity. Our
             first contribution is a <b>node-wise beam search (NBS)</b> algorithm, which maintains
             top-<i>B</i> candidates per node to enable more effective exploration of the solution
-            space. Systematic benchmarking on graphs shows that NBS consistently outperforms other
+            space. Systematic benchmarking on graphs shows that NBS consistently outperforms all
             baselines and maintains strong performance even at low beam widths.
           </p>
           <p>
@@ -216,120 +211,90 @@
 
 
 <!-- Hardware Experiment Videos -->
-<section id="hardware-videos" class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Hardware Experiment Videos</h2>
-      <div class="tabs is-centered is-toggle is-toggle-rounded hardware-tabs" role="tablist" aria-label="Hardware scenarios">
-        <ul>
-          <li class="is-active">
-            <a href="#" data-scenario-tab="outdoor" aria-controls="scenario-outdoor">Outdoor</a>
-          </li>
-          <li>
-            <a href="#" data-scenario-tab="engine" aria-controls="scenario-engine">Engine Museum</a>
-          </li>
-          <li>
-            <a href="#" data-scenario-tab="cafeteria" aria-controls="scenario-cafeteria">Cafeteria</a>
-          </li>
-          <li>
-            <a href="#" data-scenario-tab="lab" aria-controls="scenario-lab">Lab</a>
-          </li>
-        </ul>
-      </div>
+<section id="hardware-videos" class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Hardware Experiment Videos</h2>
+    <div class="tabs is-centered is-toggle is-toggle-rounded hardware-tabs" role="tablist" aria-label="Hardware scenarios">
+      <ul>
+        <li class="is-active">
+          <a href="#" data-scenario-tab="outdoor" aria-controls="scenario-outdoor">Outdoor</a>
+        </li>
+        <li>
+          <a href="#" data-scenario-tab="engine" aria-controls="scenario-engine">Engine Museum</a>
+        </li>
+        <li>
+          <a href="#" data-scenario-tab="cafeteria" aria-controls="scenario-cafeteria">Cafeteria</a>
+        </li>
+        <li>
+          <a href="#" data-scenario-tab="lab" aria-controls="scenario-lab">Lab</a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="content hardware-scenario-panel" id="scenario-outdoor" data-scenario-panel="outdoor">
-        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
-          Surface reconstruction &mdash; Outdoor
-        </p>
-        <div class="columns is-variable is-2">
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="real">
-                <source src="./static/videos/surface_reconstruction_outdoor_real.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="rviz">
-                <source src="./static/videos/surface_reconstruction_outdoor_sim.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+    <div class="hardware-scenario-panel" id="scenario-outdoor" data-scenario-panel="outdoor">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="real">
+            <source src="./static/videos/surface_reconstruction_outdoor_real.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Real Robot</p>
+        </div>
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="rviz">
+            <source src="./static/videos/surface_reconstruction_outdoor_sim.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Planner Visualization</p>
         </div>
       </div>
+    </div>
 
-      <div class="content hardware-scenario-panel is-hidden" id="scenario-cafeteria" data-scenario-panel="cafeteria">
-        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
-          Volumetric exploration &mdash; Cafeteria
-        </p>
-        <div class="columns is-variable is-2">
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="real">
-                <source src="./static/videos/volumetric_exploration_cafeteria_real.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="rviz">
-                <source src="./static/videos/volumetric_exploration_cafeteria_sim.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+    <div class="hardware-scenario-panel is-hidden" id="scenario-cafeteria" data-scenario-panel="cafeteria">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="real">
+            <source src="./static/videos/volumetric_exploration_cafeteria_real.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Real Robot</p>
+        </div>
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="rviz">
+            <source src="./static/videos/volumetric_exploration_cafeteria_sim.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Planner Visualization</p>
         </div>
       </div>
+    </div>
 
-      <div class="content hardware-scenario-panel is-hidden" id="scenario-engine" data-scenario-panel="engine">
-        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
-          Surface reconstruction &mdash; Engine museum
-        </p>
-        <div class="columns is-variable is-2">
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="real">
-                <source src="./static/videos/surface_reconstruction_engine_real.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="rviz">
-                <source src="./static/videos/surface_reconstruction_engine_sim.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+    <div class="hardware-scenario-panel is-hidden" id="scenario-engine" data-scenario-panel="engine">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="real">
+            <source src="./static/videos/surface_reconstruction_engine_real.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Real Robot</p>
+        </div>
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="rviz">
+            <source src="./static/videos/surface_reconstruction_engine_sim.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Planner Visualization</p>
         </div>
       </div>
+    </div>
 
-      <div class="content hardware-scenario-panel is-hidden" id="scenario-lab" data-scenario-panel="lab">
-        <p class="has-text-centered has-text-weight-semibold is-size-5 mb-4">
-          Volumetric exploration &mdash; Lab
-        </p>
-        <div class="columns is-variable is-2">
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Real Robot</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="real">
-                <source src="./static/videos/volumetric_exploration_lab_real.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-          <div class="column">
-            <div class="box has-text-centered">
-              <p class="has-text-weight-semibold is-size-6 mb-3">Planner Visualization</p>
-              <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="rviz">
-                <source src="./static/videos/volumetric_exploration_lab_sim.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+    <div class="hardware-scenario-panel is-hidden" id="scenario-lab" data-scenario-panel="lab">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="real">
+            <source src="./static/videos/volumetric_exploration_lab_real.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Real Robot</p>
+        </div>
+        <div class="column">
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="rviz">
+            <source src="./static/videos/volumetric_exploration_lab_sim.mp4" type="video/mp4">
+          </video>
+          <p class="figure-caption">Planner Visualization</p>
         </div>
       </div>
     </div>
@@ -360,16 +325,14 @@
             costs along the path. We study this problem under three progressively more realistic settings:
           </p>
           <ol>
-            <li><b>Graph a priori.</b> The graph is fully known in advance. The robot plans a path that
-              maximizes total gain within the budget.</li>
+            <li><b>Graph a priori.</b> The graph is fully known in advance. No need to explore.</li>
             <li><b>Graph online perception.</b> The graph exists but is discovered incrementally through
-              local sensing within a perception radius $\rho$. The policy must adapt as new vertices
-              and edges are revealed, balancing exploitation of known high-gain regions with exploration
+              local sensing. Need to balance exploitation of known high-gain regions with exploration
               of the unknown.</li>
             <li><b>Active perception.</b> No graph is given. The robot operates in continuous 3D space
               and must autonomously construct a graph within the discovered collision-free space
-              $\mathcal{X}_{\mathrm{free}}$ while simultaneously planning and navigating to maximize a
-              task-dependent objective such as surface reconstruction or volumetric exploration.</li>
+              $\mathcal{X}_{\mathrm{free}}$ while simultaneously planning to maximize a
+              task-dependent objective.</li>
           </ol>
 
           <!-- Animated illustrations of the three settings -->
@@ -378,7 +341,7 @@
             <!-- (i) Graph A Priori -->
             <div class="column">
               <div class="has-text-centered">
-                <object type="image/svg+xml" data="./static/images/pf_graph_apriori.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <object type="image/svg+xml" data="./static/images/pf_graph_apriori.svg" class="pf-diagram"></object>
                 <p class="is-size-7 has-text-grey mt-2"><b>(i)</b> Full graph known; optimal path drawn</p>
               </div>
             </div>
@@ -386,7 +349,7 @@
             <!-- (ii) Online Perception -->
             <div class="column">
               <div class="has-text-centered">
-                <object type="image/svg+xml" data="./static/images/pf_online_perception.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <object type="image/svg+xml" data="./static/images/pf_online_perception.svg" class="pf-diagram"></object>
                 <p class="is-size-7 has-text-grey mt-2"><b>(ii)</b> Nodes discovered as robot moves</p>
               </div>
             </div>
@@ -394,7 +357,7 @@
             <!-- (iii) Active Perception -->
             <div class="column">
               <div class="has-text-centered">
-                <object type="image/svg+xml" data="./static/images/pf_active_perception.svg" style="max-width:260px;width:100%;margin:0 auto;display:block"></object>
+                <object type="image/svg+xml" data="./static/images/pf_active_perception.svg" class="pf-diagram"></object>
                 <p class="is-size-7 has-text-grey mt-2"><b>(iii)</b> Graph built from free space</p>
               </div>
             </div>
@@ -403,8 +366,8 @@
 
           <p>
             We seek an algorithm that performs well across all three settings. The contributions
-            below address the path selection strategy (NBS, Expected Gain) and the graph construction
-            method (RRAG) needed for the active perception setting.
+            below address the search algorithm (NBS), the path selection criterion (Expected Gain),
+            and the graph construction method (RRAG) needed for the active perception setting.
           </p>
         </div>
       </div>
@@ -419,6 +382,37 @@
 
     <h2 class="title is-3 has-text-centered">Method Overview</h2>
 
+    <!-- Contribution cards -->
+    <div class="columns is-variable is-4 mt-4 mb-5 contribution-cards">
+      <div class="column">
+        <div class="box has-text-centered contribution-card">
+          <span class="icon is-large has-text-link">
+            <i class="fas fa-compass fa-2x"></i>
+          </span>
+          <p class="title is-5 mt-3">Expected Gain</p>
+          <p class="is-size-6">A path selection criterion that considers frontier information, naturally balancing exploration with exploitation.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box has-text-centered contribution-card">
+          <span class="icon is-large has-text-link">
+            <i class="fas fa-search fa-2x"></i>
+          </span>
+          <p class="title is-5 mt-3">Node-wise Beam Search</p>
+          <p class="is-size-6">Maintains the top-<em>B</em> candidate paths per node, avoiding local optima and delivering strong performance even at beam width <em>B</em>=1.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box has-text-centered contribution-card">
+          <span class="icon is-large has-text-link">
+            <i class="fas fa-project-diagram fa-2x"></i>
+          </span>
+          <p class="title is-5 mt-3">RRAG</p>
+          <p class="is-size-6">An incrementally built graph with full orientation sampling and a fallback local planner ensuring connectivity in cluttered environments.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Expected Gain -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -428,21 +422,21 @@
             The choice of selection criterion determines how candidate paths are ranked and which trade-offs the planner makes. We consider three criteria:
           </p>
           <ul>
-            <li><b>Path Gain</b> — maximizes total accumulated gain along the path, but provides no incentive to explore unknown regions.</li>
-            <li><b>Path Ratio</b> — optimizes gain-to-cost ratio, but implicitly assumes the current ratio can be sustained over the remaining budget — leaving no incentive to explore frontiers once the highest-ratio path is found.</li>
+            <li><b>Path Gain</b> — maximizes total accumulated gain along the path. Provides no incentive to explore unknown regions.</li>
+            <li><b>Path Ratio</b> — optimizes gain-to-cost ratio. This implicitly assumes the current ratio can be sustained over the remaining budget — leaving no incentive to explore frontiers once the highest-ratio path is found.</li>
             <li><b>Expected Gain (ours)</b> — scores frontier paths by extrapolating their gain-to-cost ratio over the full budget, while non-frontier paths are scored by gain directly, naturally balancing exploration with exploitation.</li>
           </ul>
         </div>
         <div class="content" id="eg-demo-root">
-          <div class="box" style="background:#fafafa;border:1px solid #e2e8f0;padding:1rem 1.25rem">
+          <div class="box eg-demo-box">
             <p class="has-text-centered is-size-7 has-text-grey mb-3">
               Drag the budget slider and switch criteria to see which path each method selects
             </p>
             <div class="columns is-variable is-4">
 
               <!-- SVG graph column -->
-              <div class="column is-half" style="display:flex;align-items:center">
-                <svg id="eg-svg" viewBox="0 0 480 305" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+              <div class="column is-half eg-svg-col">
+                <svg id="eg-svg" viewBox="0 0 480 305" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <marker id="eg-arr" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
                       <path d="M0,0.5 L0,5.5 L6.5,3 z" fill="#b0b8c8"/>
@@ -518,50 +512,49 @@
               <div class="column is-half">
                 <!-- Budget slider -->
                 <div class="field mb-3">
-                  <label class="label is-small mb-1" style="font-size:13px">
-                    Budget&ensp;<em>C</em>&nbsp;=&nbsp;<span id="eg-bval" style="font-weight:800;font-size:1.25em;color:#4338ca">4</span>
+                  <label class="label is-small mb-1 eg-slider-label">
+                    Budget&ensp;<em>C</em>&nbsp;=&nbsp;<span id="eg-bval">4</span>
                   </label>
-                  <input type="range" id="eg-slider" min="1" max="6" value="4" step="1"
-                         style="width:100%;accent-color:#4338ca;cursor:pointer">
-                  <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;margin-top:1px">
+                  <input type="range" id="eg-slider" min="1" max="6" value="4" step="1">
+                  <div class="eg-slider-ticks">
                     <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
                   </div>
                 </div>
 
                 <!-- Criterion buttons -->
                 <div class="field mb-3">
-                  <label class="label is-small mb-1" style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">Selection Criterion</label>
-                  <div style="display:flex;gap:4px">
+                  <label class="label is-small mb-1 eg-crit-label">Selection Criterion</label>
+                  <div class="eg-crit-row">
                     <button class="eg-crit-btn" data-crit="gain"
-                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                            >
                       Path Gain
                     </button>
                     <button class="eg-crit-btn" data-crit="ratio"
-                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                            >
                       Path Ratio
                     </button>
                     <button class="eg-crit-btn" data-crit="expected"
-                            style="flex:1;padding:5px 0;font-size:11px;border-radius:4px;border:1.5px solid #d1d5db;cursor:pointer;background:#f9fafb;color:#374151">
+                            >
                       Expected Gain
                     </button>
                   </div>
                 </div>
 
                 <!-- Score table -->
-                <table class="table is-narrow is-bordered" style="width:100%;font-size:11.5px;margin-bottom:8px;table-layout:fixed">
+                <table class="table is-narrow is-bordered eg-score-table">
                   <thead>
-                    <tr style="background:#f8fafc">
-                      <th style="padding:4px 7px;width:36%">Path</th>
-                      <th style="padding:4px 7px;text-align:center;width:12%">g(p)</th>
-                      <th style="padding:4px 7px;text-align:center;width:12%">c(p)</th>
-                      <th style="padding:4px 7px;text-align:center;width:40%">Score</th>
+                    <tr>
+                      <th>Path</th>
+                      <th style="text-align:center">g(p)</th>
+                      <th style="text-align:center">c(p)</th>
+                      <th style="text-align:center">Score q(p)</th>
                     </tr>
                   </thead>
                   <tbody id="eg-tbody"></tbody>
                 </table>
 
                 <!-- Criterion formula / hint -->
-                <div id="eg-fbox" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:9px 12px;font-size:11.5px;line-height:1.6;min-height:80px"></div>
+                <div id="eg-fbox"></div>
               </div>
 
             </div>
@@ -576,18 +569,23 @@
         <h3 class="title is-4">Node-wise Beam Search (NBS)</h3>
         <div class="content has-text-justified">
           <p>
-            <b>Motivation.</b> Depth-wise beam search (DBS) maintains the top $B$ paths at each search depth, but this makes it prone to local optima&mdash;once the entire beam converges on regions with high immediate gains, it neglects other promising candidates. In the worst case, all $B$ paths in the beam may terminate at the same node.
+            <b>Motivation.</b> The standard beam search — <b>depth-wise beam search (DBS)</b> —
+            retains the top $B$ paths globally at each search depth. This makes it prone to local
+            optima: once the beam converges on the same high-gain region, all $B$ paths can
+            terminate at the same node. Performance is also sensitive to the choice of $B$.
           </p>
           <p>
-            <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This ensures that at least one promising path remains available at every visited node, encouraging exploration across the graph rather than focusing on immediate high-gain regions.
+            <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This
+            guarantees at least one promising path at every visited node, encouraging broader
+            exploration of the graph — and makes NBS robust even at $B=1$.
           </p>
         </div>
 
         <!-- Algorithm pseudocode -->
         <div class="content">
-          <div class="box">
+          <div class="box has-background-light algo-box">
             <p class="title is-6"><b>Algorithm: Node-wise Beam Search (NBS)</b></p>
-            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$<br>
+            <p><b>Input:</b> Graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, start node $v_s$, cost budget $C$<br>
             <b>Parameters:</b> beam width $B$, search depth $D$, path quality function $q$</p>
             <hr>
             <ol>
@@ -595,7 +593,7 @@
               <li><b>for</b> depth $d = 1$ to $D$ <b>do</b>
                 <ol type="a">
                   <li>Initialize empty per-node heap $\textbf{heap}$</li>
-                  <li><b>for each</b> node $v \in \mathcal{V}$ with $\textbf{open}[v] \neq \emptyset$ <b>do</b>
+                  <li><b>for each</b> node $v \in \mathcal{V}$ <b>do</b>
                     <ol type="i">
                       <li><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b>
                         <ol>
@@ -625,40 +623,6 @@
           </p>
         </div>
 
-        <!-- Complexity comparison table -->
-        <!-- <div class="content">
-          <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-            <thead>
-              <tr>
-                <th>Algorithm</th>
-                <th>Time Complexity</th>
-                <th>Space Complexity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>TSP</td>
-                <td>$\Omega(|\mathcal{V}|^3),\; O(|\mathcal{V}|^2 \, 2^{|\mathcal{V}|})$</td>
-                <td>$\Omega(|\mathcal{V}|^2),\; O(|\mathcal{V}| \, 2^{|\mathcal{V}|})$</td>
-              </tr>
-              <tr>
-                <td>SPT</td>
-                <td>$O(|\mathcal{V}||\mathcal{E}|)$</td>
-                <td>$O(|\mathcal{V}|)$</td>
-              </tr>
-              <tr>
-                <td>DBS</td>
-                <td>$O(|\mathcal{V}|\,D\,B\,(D + \log B))$</td>
-                <td>$O(D\,B)$</td>
-              </tr>
-              <tr class="has-background-success-light">
-                <td><b>NBS (ours)</b></td>
-                <td>$O(|\mathcal{E}|\,D\,B\,(D + \log B))$</td>
-                <td>$O(|\mathcal{V}|\,D\,B)$</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
       </div>
     </div>
 
@@ -666,6 +630,25 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Rapidly-Exploring Random Annulus Graph (RRAG)</h3>
+        <div class="content has-text-justified">
+          <p>
+            RRAG is an incrementally built graph for active perception, inspired by the Rapidly-exploring Random Graph (RRG). It enforces two spacing rules that give it an <em>annulus</em> structure:
+          </p>
+          <ul>
+            <li><b>Minimum distance</b> $l_{\min}$: a new node is accepted only if it is farther than $l_{\min}$ from all nodes, preventing oversampling.</li>
+            <li><b>Maximum distance</b> $l_{\max}$: edges are formed only between nodes within distance $l_{\max}$, bounding the out-degree.</li>
+          </ul>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            <b>Key properties:</b>
+          </p>
+          <ul>
+            <li><b>Full orientation preservation.</b> Unlike prior methods that keep only one orientation per position, RRAG retains all discrete orientations as distinct nodes within a <em>node cluster</em>, enabling richer path optimization.</li>
+            <li><b>Fallback local planner.</b> In narrow or cluttered environments where straight-line connections fail, a local sampling-based planner based on RRT* finds collision-free paths, ensuring graph connectivity.</li>
+            <li><b>Guaranteed connectivity.</b> We prove that the annulus graph is connected whenever $l_{\max} \geq 2\,l_{\min}$, provided the nodes satisfy packing and covering conditions.</li>
+          </ul>
+        </div>
         <div class="content has-text-centered">
           <div class="rrag-video-frame">
             <video class="rrag-video" autoplay muted loop playsinline preload="metadata">
@@ -673,19 +656,10 @@
             </video>
           </div>
         </div>
-        <div class="content has-text-justified">
-          <p>
-            RRAG is an incrementally built graph for active perception, inspired by the Rapidly-exploring Random Graph (RRG). It enforces two spacing rules that give it an <em>annulus</em> structure:
-          </p>
-          <ul>
-            <li><b>Minimum distance</b> $l_{\min}$: a new node is accepted only if its distance to all existing nodes exceeds $l_{\min}$, preventing oversampling.</li>
-            <li><b>Maximum distance</b> $l_{\max}$: edges are formed only between nodes within distance $l_{\max}$, bounding the out-degree.</li>
-          </ul>
-        </div>
 
         <!-- RRAG Algorithm -->
         <div class="content">
-          <div class="box">
+          <div class="box has-background-light algo-box">
             <p class="title is-6"><b>Algorithm: RRAG Construction</b></p>
             <p><b>Input:</b> Current graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$</p>
             <hr>
@@ -714,17 +688,6 @@
             </ol>
           </div>
         </div>
-
-        <div class="content has-text-justified">
-          <p>
-            <b>Key properties:</b>
-          </p>
-          <ul>
-            <li><b>Full orientation preservation.</b> Unlike prior methods that keep only one orientation per position, RRAG retains all discrete orientations as distinct nodes within a <em>node cluster</em>, enabling richer path optimization.</li>
-            <li><b>Fallback local planner.</b> In narrow or cluttered environments where straight-line connections fail, a fallback local sampling-based planner (FLS) based on RRT* finds collision-free paths, ensuring graph connectivity.</li>
-            <li><b>Guaranteed connectivity.</b> We prove that the annulus graph is connected whenever $l_{\max} \geq 2\,l_{\min}$, provided the nodes satisfy packing and covering conditions.</li>
-          </ul>
-        </div>
       </div>
     </div>
 
@@ -737,19 +700,97 @@
 
     <h2 class="title is-3 has-text-centered">Results</h2>
 
+    <!-- Benchmarking on Graphs -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Benchmarking on Graphs</h3>
+        <div class="content has-text-justified">
+          <p>
+            Before deploying in active perception, we benchmark all algorithms on abstract
+            graphs in two progressively harder settings: <b>graph a priori</b> and <b>graph online perception</b>.
+            We evaluate clustered and scattered
+            gain distributions at two graph scales (25&thinsp;&times;&thinsp;25&thinsp;m and
+            50&thinsp;&times;&thinsp;50&thinsp;m), across all combinations of selection
+            criteria and replanning strategies.
+          </p>
+        </div>
+
+        <!-- Summary table -->
+        <div class="content">
+            <table class="benchmark-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>NBS (ours)</th>
+                  <th>DBS</th>
+                  <th>SPT</th>
+                  <th>TSP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Computation time</td>
+                  <td class="cell-good">Low</td>
+                  <td class="cell-good">Low&ndash;Med.</td>
+                  <td class="cell-best">Lowest</td>
+                  <td class="cell-poor">Highest</td>
+                </tr>
+                <tr>
+                  <td>Gain</td>
+                  <td class="cell-best">Highest</td>
+                  <td class="cell-good">High</td>
+                  <td class="cell-poor">Low</td>
+                  <td class="cell-poor">Low</td>
+                </tr>
+                <tr>
+                  <td>Parameter sensitivity</td>
+                  <td class="cell-best">Low</td>
+                  <td class="cell-poor">High</td>
+                  <td class="cell-best">Low</td>
+                  <td class="cell-poor">High</td>
+                </tr>
+                <tr>
+                  <td>Path selection sensitivity</td>
+                  <td class="cell-best">Low</td>
+                  <td class="cell-poor">High</td>
+                  <td class="cell-poor">High</td>
+                  <td class="cell-neutral">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="benchmark-legend">
+              <span class="legend-label">Summary of algorithm performance across graph benchmarking experiments.</span>
+              <span class="legend-item cell-best">Best</span>
+              <span class="legend-item cell-good">Good</span>
+              <span class="legend-item cell-poor">Poor</span>
+            </div>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>Key takeaways.</b> In both settings, NBS achieves the highest gains with
+            minimal sensitivity to beam width or path selection — even $B=1$ delivers strong
+            results. In the <b>online perception</b> setting, the <b>expected gain</b> criterion
+            outperforms path gain and path ratio by explicitly rewarding exploration of frontier
+            regions. This criterion is adopted for all following active perception experiments.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- Normalized Gain -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Active Perception Performance</h3>
-        <div class="content has-text-centered">
-          <img src="./static/images/normalized_gain_barplots_new2.png" alt="Normalized gain comparison">
+        <div class="content">
+          <canvas id="barplot-canvas"></canvas>
         </div>
         <div class="content has-text-justified">
           <p>
             NBS achieves the highest normalized performance across all three representative active
-            perception tasks: <b>point collection</b>, <b>surface reconstruction</b>, and
-            <b>volumetric exploration</b>. It outperforms state-of-the-art methods (RRT, RRT*,
-            SPT, TSP, DBS, FUEL) by at least 20% in one or more tasks. NBS is particularly
+            perception tasks: <b>point collection</b> (0.50), <b>surface reconstruction</b>
+            (0.49), and <b>volumetric exploration</b> (0.77). It outperforms state-of-the-art
+            methods by at least 20% in one or more tasks. NBS is particularly
             strong in point collection, where the sparse gain distribution causes other methods
             to get trapped in local optima.
           </p>
@@ -764,13 +805,10 @@
         <div class="content has-text-centered">
           <img src="./static/images/surface_reconstruction_comparision_new.jpg" alt="Surface reconstruction comparison">
         </div>
-        <div class="content has-text-justified">
-          <p>
-            Qualitative comparison of surface reconstruction quality across planners. NBS
-            achieves the most complete coverage (445.73 m&sup2;), significantly outperforming
-            alternatives such as RRT* (301.75 m&sup2;) and FUEL (341.03 m&sup2;).
-          </p>
-        </div>
+        <p class="figure-caption">
+          Qualitative comparison of surface reconstruction quality across planners. NBS
+          achieves the most complete coverage (445.73 m&sup2;).
+        </p>
       </div>
     </div>
 
@@ -786,7 +824,6 @@
             exploration in a cafeteria and lab. See the <a href="#hardware-videos">hardware experiment videos</a> for qualitative results across all scenarios.
           </p>
         </div>
-
       </div>
     </div>
 
@@ -801,7 +838,7 @@
     <pre><code>@article{qu2026efficient,
   title     = {An Efficient Beam Search Algorithm for Active Perception in Mobile Robotics},
   author    = {Qu, Kaixian and Wang, Han and Klemm, Victor and Cadena, Cesar and Hutter, Marco},
-  journal   = {International Journal of Robotics Research (IJRR)},
+  journal   = {The International Journal of Robotics Research},
   year      = {2026}
 }</code></pre>
   </div>
@@ -1032,15 +1069,10 @@ function attachPairSync(real, rviz) {
     return isFrontier(p) ? (g / c) * C : g;
   }
 
-  var COLORS = { gain: '#2563eb', ratio: '#2563eb', expected: '#2563eb' };
-  var STYLES = {
-    gain:     { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
-    ratio:    { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
-    expected: { bg: '#eff6ff', border: '#2563eb', color: '#2563eb' },
-  };
+  var ACTIVE_COLOR = '#2563eb';
   var FORMULAS = {
-    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; sums gain over all visited nodes. <b style="color:#b45309">Con:</b> no incentive to explore — frontier nodes offering higher future gain are not preferred.',
-    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b style="color:#b45309">Con:</b> implicitly assumes the current ratio holds for the remaining budget, ignoring frontier information entirely.',
+    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; sums gain over all visited nodes. <b class="has-text-warning-dark">Con:</b> no incentive to explore — frontier nodes offering higher future gain are not preferred.',
+    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b class="has-text-warning-dark">Con:</b> implicitly assumes the current ratio holds for the remaining budget, ignoring frontier information entirely.',
     expected: '<b>Expected Gain (ours):</b> frontier paths score as $r(p)\\cdot C$, extrapolating their ratio over the full budget. Try sliding $C$ from 3 to 4: v\u2080\u2192v\u2082 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083!',
   };
 
@@ -1048,25 +1080,11 @@ function attachPairSync(real, rviz) {
 
   function setActive(crit) {
     activeCrit = crit;
-    var col = COLORS[crit];
     document.querySelectorAll('.eg-crit-btn').forEach(function(b) {
-      if (b.getAttribute('data-crit') === crit) {
-        var s = STYLES[crit];
-        b.style.background = s.bg; b.style.borderColor = s.border;
-        b.style.color = s.color; b.style.fontWeight = '700';
-      } else {
-        b.style.background = '#f9fafb'; b.style.borderColor = '#d1d5db';
-        b.style.color = '#374151'; b.style.fontWeight = '400';
-      }
+      b.classList.toggle('is-active', b.getAttribute('data-crit') === crit);
     });
-    var bval = document.getElementById('eg-bval');
-    if (bval) bval.style.color = col;
-    var slider = document.getElementById('eg-slider');
-    if (slider) slider.style.accentColor = col;
-    var fbox = document.getElementById('eg-fbox');
-    if (fbox) fbox.style.borderColor = col;
     var lpath = document.getElementById('eg-legend-path');
-    if (lpath) lpath.setAttribute('fill', col);
+    if (lpath) lpath.setAttribute('fill', ACTIVE_COLOR);
   }
 
   function update() {
@@ -1086,11 +1104,10 @@ function attachPairSync(real, rviz) {
       var el = document.getElementById(id);
       if (el) el.setAttribute('stroke', 'transparent');
     });
-    var col = COLORS[activeCrit];
     if (bestIdx >= 0) {
       PATHS[bestIdx].edges.forEach(function(id) {
         var el = document.getElementById(id);
-        if (el) el.setAttribute('stroke', col);
+        if (el) el.setAttribute('stroke', ACTIVE_COLOR);
       });
     }
 
@@ -1100,10 +1117,10 @@ function attachPairSync(real, rviz) {
     results.forEach(function(r, i) {
       var tr = document.createElement('tr');
       var best = i === bestIdx;
-      if (best) { tr.style.background = col + '18'; tr.style.fontWeight = '600'; }
+      if (best) tr.classList.add('eg-best-row');
       var scoreStr;
       if (r.s === null) {
-        scoreStr = '<span style="color:#9ca3af;font-style:italic">over budget</span>';
+        scoreStr = '<span class="eg-over-budget">over budget</span>';
       } else {
         var val = Math.round(r.s * 10) / 10;
         if (activeCrit === 'expected' && r.front && r.c > 0) {
@@ -1114,10 +1131,10 @@ function attachPairSync(real, rviz) {
         }
         if (best) scoreStr = '<b>' + scoreStr + '</b>';
       }
-      tr.innerHTML = '<td style="padding:4px 7px">' + r.p.label + '</td>' +
-                     '<td style="padding:4px 7px;text-align:center">' + r.g + '</td>' +
-                     '<td style="padding:4px 7px;text-align:center">' + r.c + '</td>' +
-                     '<td style="padding:4px 7px;text-align:center">' + scoreStr + '</td>';
+      tr.innerHTML = '<td>' + r.p.label + '</td>' +
+                     '<td>' + r.g + '</td>' +
+                     '<td>' + r.c + '</td>' +
+                     '<td>' + scoreStr + '</td>';
       tbody.appendChild(tr);
     });
 
@@ -1137,6 +1154,86 @@ function attachPairSync(real, rviz) {
     });
     setActive('gain');
     update();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var ALGORITHMS = ['NBS', 'DBS', 'SPT', 'TSP', 'FUEL', 'RRT*', 'RRT'];
+
+  // seaborn Set2 palette
+  var C1 = '#66c2a5', C2 = '#fc8d62', C3 = '#8da0cb';
+
+  var datasets = [
+    {
+      label: 'Point collection',
+      data: [0.50, 0.36, 0.43, 0.22, 0.30, 0.31, 0.31],
+      backgroundColor: C1,
+      borderColor: C1,
+      borderWidth: 0,
+      borderRadius: 3,
+    },
+    {
+      label: 'Surface reconstruction',
+      data: [0.49, 0.49, 0.41, 0.48, 0.43, 0.40, 0.40],
+      backgroundColor: C2,
+      borderColor: C2,
+      borderWidth: 0,
+      borderRadius: 3,
+    },
+    {
+      label: 'Volumetric exploration',
+      data: [0.77, 0.75, 0.74, 0.62, 0.59, 0.70, 0.68],
+      backgroundColor: C3,
+      borderColor: C3,
+      borderWidth: 0,
+      borderRadius: 3,
+    },
+  ];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var el = document.getElementById('barplot-canvas');
+    if (!el) return;
+
+    new Chart(el, {
+      type: 'bar',
+      data: { labels: ALGORITHMS, datasets: datasets },
+      options: {
+        responsive: true,
+        aspectRatio: 3.0,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { boxWidth: 13, padding: 18, font: { size: 12 } },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2);
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 12 } },
+          },
+          y: {
+            beginAtZero: true,
+            max: 0.85,
+            ticks: { stepSize: 0.1, font: { size: 12 } },
+            title: {
+              display: true,
+              text: 'Normalized gain',
+              font: { size: 12 },
+            },
+            grid: { color: 'rgba(0,0,0,0.06)' },
+          },
+        },
+      },
+    });
   });
 })();
 </script>
