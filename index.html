@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='50' font-size='70' text-anchor='middle' dominant-baseline='central'>🤖</text></svg>">
 
@@ -78,7 +78,7 @@
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=9TgpzJQAAAAJ&hl=en" target="_blank">Kaixian Qu</a>,</span>
             <span class="author-block">
-              Han Wang,</span>
+              <a href="https://hanwang028.github.io/" target="_blank">Han Wang</a>,</span>
             <span class="author-block">
               <a href="https://www.victorklemm.com/" target="_blank">Victor Klemm</a>,</span>
             <span class="author-block">
@@ -160,6 +160,87 @@
   </div>
 </section>
 
+<!-- Hardware Experiment Videos -->
+<section id="hardware-videos" class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Hardware Experiment Videos</h2>
+    <div class="seg-track" role="tablist" aria-label="Hardware scenarios">
+      <div class="seg-slider" id="seg-slider"></div>
+      <button class="seg-btn is-active" data-scenario-tab="outdoor" aria-controls="scenario-outdoor" aria-selected="true">Outdoor</button>
+      <button class="seg-btn" data-scenario-tab="engine" aria-controls="scenario-engine">Engine Museum</button>
+      <button class="seg-btn" data-scenario-tab="cafeteria" aria-controls="scenario-cafeteria">Cafeteria</button>
+      <button class="seg-btn" data-scenario-tab="lab" aria-controls="scenario-lab">Lab</button>
+    </div>
+
+    <div class="hardware-scenario-panel" id="scenario-outdoor" data-scenario-panel="outdoor">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <span class="hardware-video-label">Real Robot</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="real">
+            <source src="./static/videos/surface_reconstruction_outdoor_real.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <span class="hardware-video-label">Planner Visualization</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="rviz">
+            <source src="./static/videos/surface_reconstruction_outdoor_sim.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="hardware-scenario-panel is-hidden" id="scenario-cafeteria" data-scenario-panel="cafeteria">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <span class="hardware-video-label">Real Robot</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="real">
+            <source src="./static/videos/volumetric_exploration_cafeteria_real.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <span class="hardware-video-label">Planner Visualization</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="rviz">
+            <source src="./static/videos/volumetric_exploration_cafeteria_sim.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="hardware-scenario-panel is-hidden" id="scenario-engine" data-scenario-panel="engine">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <span class="hardware-video-label">Real Robot</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="real">
+            <source src="./static/videos/surface_reconstruction_engine_real.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <span class="hardware-video-label">Planner Visualization</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="rviz">
+            <source src="./static/videos/surface_reconstruction_engine_sim.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="hardware-scenario-panel is-hidden" id="scenario-lab" data-scenario-panel="lab">
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <span class="hardware-video-label">Real Robot</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="real">
+            <source src="./static/videos/volumetric_exploration_lab_real.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column">
+          <span class="hardware-video-label">Planner Visualization</span>
+          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="rviz">
+            <source src="./static/videos/volumetric_exploration_lab_sim.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -210,99 +291,6 @@
 </section>
 
 
-<!-- Hardware Experiment Videos -->
-<section id="hardware-videos" class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Hardware Experiment Videos</h2>
-    <div class="tabs is-centered is-toggle is-toggle-rounded hardware-tabs" role="tablist" aria-label="Hardware scenarios">
-      <ul>
-        <li class="is-active">
-          <a href="#" data-scenario-tab="outdoor" aria-controls="scenario-outdoor">Outdoor</a>
-        </li>
-        <li>
-          <a href="#" data-scenario-tab="engine" aria-controls="scenario-engine">Engine Museum</a>
-        </li>
-        <li>
-          <a href="#" data-scenario-tab="cafeteria" aria-controls="scenario-cafeteria">Cafeteria</a>
-        </li>
-        <li>
-          <a href="#" data-scenario-tab="lab" aria-controls="scenario-lab">Lab</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="hardware-scenario-panel" id="scenario-outdoor" data-scenario-panel="outdoor">
-      <div class="columns is-variable is-4">
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="real">
-            <source src="./static/videos/surface_reconstruction_outdoor_real.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Real Robot</p>
-        </div>
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="outdoor" data-sync-role="rviz">
-            <source src="./static/videos/surface_reconstruction_outdoor_sim.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Planner Visualization</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hardware-scenario-panel is-hidden" id="scenario-cafeteria" data-scenario-panel="cafeteria">
-      <div class="columns is-variable is-4">
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="real">
-            <source src="./static/videos/volumetric_exploration_cafeteria_real.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Real Robot</p>
-        </div>
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="cafeteria" data-sync-role="rviz">
-            <source src="./static/videos/volumetric_exploration_cafeteria_sim.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Planner Visualization</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hardware-scenario-panel is-hidden" id="scenario-engine" data-scenario-panel="engine">
-      <div class="columns is-variable is-4">
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="real">
-            <source src="./static/videos/surface_reconstruction_engine_real.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Real Robot</p>
-        </div>
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="engine" data-sync-role="rviz">
-            <source src="./static/videos/surface_reconstruction_engine_sim.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Planner Visualization</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="hardware-scenario-panel is-hidden" id="scenario-lab" data-scenario-panel="lab">
-      <div class="columns is-variable is-4">
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="real">
-            <source src="./static/videos/volumetric_exploration_lab_real.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Real Robot</p>
-        </div>
-        <div class="column">
-          <video class="hardware-video" autoplay muted loop preload="metadata" playsinline data-sync-group="lab" data-sync-role="rviz">
-            <source src="./static/videos/volumetric_exploration_lab_sim.mp4" type="video/mp4">
-          </video>
-          <p class="figure-caption">Planner Visualization</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--/ Hardware Experiment Videos -->
-
-
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -312,8 +300,7 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            In active perception, a robot must decide where to move and what to observe in order
-            to maximize the information gained about its environment. We formulate this as a
+            We formulate active perception as a
             budget-constrained path optimization on a directed graph
             $\mathcal{G} = (\mathcal{V}, \mathcal{E}, g, c)$ with vertex gains $g(v) \geq 0$ and
             positive edge costs $c(e) > 0$. The objective is to find a path $p^*$ starting from
@@ -364,11 +351,6 @@
 
           </div>
 
-          <p>
-            We seek an algorithm that performs well across all three settings. The contributions
-            below address the search algorithm (NBS), the path selection criterion (Expected Gain),
-            and the graph construction method (RRAG) needed for the active perception setting.
-          </p>
         </div>
       </div>
     </div>
@@ -385,52 +367,58 @@
     <!-- Contribution cards -->
     <div class="columns is-variable is-4 mt-4 mb-5 contribution-cards">
       <div class="column">
-        <div class="box has-text-centered contribution-card">
-          <span class="icon is-large has-text-link">
-            <i class="fas fa-compass fa-2x"></i>
-          </span>
-          <p class="title is-5 mt-3">Expected Gain</p>
-          <p class="is-size-6">A path selection criterion that considers frontier information, naturally balancing exploration with exploitation.</p>
-        </div>
+        <a href="#method-expected-gain" class="contribution-card-link">
+          <div class="box has-text-centered contribution-card">
+            <span class="icon is-large has-text-link">
+              <i class="fas fa-compass fa-2x"></i>
+            </span>
+            <p class="title is-5 mt-3">Expected Gain</p>
+            <p class="is-size-6">A path selection criterion that balances exploration and exploitation using frontier information.</p>
+          </div>
+        </a>
       </div>
       <div class="column">
-        <div class="box has-text-centered contribution-card">
-          <span class="icon is-large has-text-link">
-            <i class="fas fa-search fa-2x"></i>
-          </span>
-          <p class="title is-5 mt-3">Node-wise Beam Search</p>
-          <p class="is-size-6">Maintains the top-<em>B</em> candidate paths per node, avoiding local optima and delivering strong performance even at beam width <em>B</em>=1.</p>
-        </div>
+        <a href="#method-nbs" class="contribution-card-link">
+          <div class="box has-text-centered contribution-card">
+            <span class="icon is-large has-text-link">
+              <i class="fas fa-search fa-2x"></i>
+            </span>
+            <p class="title is-5 mt-3">Node-wise Beam Search</p>
+            <p class="is-size-6">Maintains the top-<em>B</em> candidate paths per node, delivering strong performance even at low beam width.</p>
+          </div>
+        </a>
       </div>
       <div class="column">
-        <div class="box has-text-centered contribution-card">
-          <span class="icon is-large has-text-link">
-            <i class="fas fa-project-diagram fa-2x"></i>
-          </span>
-          <p class="title is-5 mt-3">RRAG</p>
-          <p class="is-size-6">An incrementally built graph with full orientation sampling and a fallback local planner ensuring connectivity in cluttered environments.</p>
-        </div>
+        <a href="#method-rrag" class="contribution-card-link">
+          <div class="box has-text-centered contribution-card">
+            <span class="icon is-large has-text-link">
+              <i class="fas fa-project-diagram fa-2x"></i>
+            </span>
+            <p class="title is-5 mt-3">RRAG</p>
+            <p class="is-size-6">An incrementally built graph with full orientation sampling and strong connectivity in cluttered environments.</p>
+          </div>
+        </a>
       </div>
     </div>
 
     <!-- Expected Gain -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Expected Gain: Balancing Exploration and Exploitation</h3>
+        <h3 class="title is-4" id="method-expected-gain">Expected Gain: Balancing Exploration and Exploitation</h3>
         <div class="content has-text-justified">
           <p>
-            The choice of selection criterion determines how candidate paths are ranked and which trade-offs the planner makes. We consider three criteria:
+            The choice of selection criterion determines how candidate paths are ranked. We consider three criteria:
           </p>
           <ul>
-            <li><b>Path Gain</b> — maximizes total accumulated gain along the path. Provides no incentive to explore unknown regions.</li>
-            <li><b>Path Ratio</b> — optimizes gain-to-cost ratio. This implicitly assumes the current ratio can be sustained over the remaining budget — leaving no incentive to explore frontiers once the highest-ratio path is found.</li>
-            <li><b>Expected Gain (ours)</b> — scores frontier paths by extrapolating their gain-to-cost ratio over the full budget, while non-frontier paths are scored by gain directly, naturally balancing exploration with exploitation.</li>
+            <li><b>Path Gain</b> — uses accumulated gain directly, $q(p)=g(p)$. Provides no incentive to explore unknown regions.</li>
+            <li><b>Path Ratio</b> — ranks paths by gain per cost, $q(p)=g(p)/c(p)$, implicitly assuming the same ratio can be sustained over the remaining budget.</li>
+            <li><b>Expected Gain (ours)</b> — defines $q(p)=g_e(p)$: frontier paths extrapolate the ratio $g(p)/c(p)$ over the full budget, while non-frontier paths use $g(p)$. This balances exploration and exploitation.</li>
           </ul>
         </div>
         <div class="content" id="eg-demo-root">
           <div class="box eg-demo-box">
             <p class="has-text-centered is-size-7 has-text-grey mb-3">
-              Drag the budget slider and switch criteria to see which path each method selects
+              Drag the budget slider and switch between criteria to see which path each method selects
             </p>
             <div class="columns is-variable is-4">
 
@@ -545,9 +533,9 @@
                   <thead>
                     <tr>
                       <th>Path</th>
-                      <th style="text-align:center">g(p)</th>
-                      <th style="text-align:center">c(p)</th>
-                      <th style="text-align:center">Score q(p)</th>
+                      <th>g(p)</th>
+                      <th>c(p)</th>
+                      <th>Score q(p)</th>
                     </tr>
                   </thead>
                   <tbody id="eg-tbody"></tbody>
@@ -566,7 +554,7 @@
     <!-- NBS Algorithm -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Node-wise Beam Search (NBS)</h3>
+        <h3 class="title is-4" id="method-nbs">Node-wise Beam Search (NBS)</h3>
         <div class="content has-text-justified">
           <p>
             <b>Motivation.</b> The standard beam search — <b>depth-wise beam search (DBS)</b> —
@@ -577,7 +565,9 @@
           <p>
             <b>Key idea.</b> NBS instead maintains the top $B$ paths <em>per node</em>. This
             guarantees at least one promising path at every visited node, encouraging broader
-            exploration of the graph — and makes NBS robust even at $B=1$.
+            exploration of the graph and making NBS robust even at $B=1$. Its time complexity is
+            $O(|\mathcal{E}|\,D\,B\,(D + \log B))$ and its space complexity is
+            $O(|\mathcal{V}|\,D\,B)$.
           </p>
         </div>
 
@@ -598,7 +588,7 @@
                 <div class="algo-block">
                   <div class="algo-step"><b>for each</b> path $p \in \textbf{open}[v]$ <b>do</b></div>
                   <div class="algo-block">
-                    <div class="algo-step"><b>for each</b> outgoing edge $(v, v') \in \delta^+(v)$ not already traversed in $p$ <b>do</b></div>
+                    <div class="algo-step"><b>for each</b> outgoing edge $(v, v')$ not already traversed in $p$ <b>do</b></div>
                     <div class="algo-block">
                       <div class="algo-step">Extend: $p' \leftarrow p + (v, v')$</div>
                       <div class="algo-step"><b>if</b> $c(p') > C$: skip (budget exceeded)</div>
@@ -614,19 +604,13 @@
           </div>
         </div>
 
-        <div class="content has-text-justified">
-          <p>
-            <b>Complexity.</b> NBS has time complexity $O(|\mathcal{E}|\,D\,B\,(D + \log B))$ and space complexity $O(|\mathcal{V}|\,D\,B)$. Even at beam width $B=1$, NBS delivers strong and robust performance due to its per-node diversity guarantee.
-          </p>
-        </div>
-
       </div>
     </div>
 
     <!-- RRAG -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Rapidly-Exploring Random Annulus Graph (RRAG)</h3>
+        <h3 class="title is-4" id="method-rrag">Rapidly-Exploring Random Annulus Graph (RRAG)</h3>
         <div class="content has-text-justified">
           <p>
             RRAG is an incrementally built graph for active perception, inspired by the Rapidly-exploring Random Graph (RRG). It enforces two spacing rules that give it an <em>annulus</em> structure:
@@ -725,16 +709,16 @@
               <tbody>
                 <tr>
                   <td>Computation time</td>
-                  <td class="cell-good">Low</td>
+                  <td class="cell-good">Medium</td>
                   <td class="cell-good">Low&ndash;Med.</td>
-                  <td class="cell-best">Lowest</td>
-                  <td class="cell-poor">Highest</td>
+                  <td class="cell-best">Low</td>
+                  <td class="cell-poor">Med.&ndash;High</td>
                 </tr>
                 <tr>
                   <td>Gain</td>
                   <td class="cell-best">Highest</td>
                   <td class="cell-good">High</td>
-                  <td class="cell-poor">Low</td>
+                  <td class="cell-good">Medium</td>
                   <td class="cell-poor">Low</td>
                 </tr>
                 <tr>
@@ -802,7 +786,7 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Surface Reconstruction Comparison</h3>
-        <div class="content has-text-centered">
+        <div class="content has-text-centered comparison-img-wrap">
           <img src="./static/images/surface_reconstruction_comparision_new.jpg" alt="Surface reconstruction comparison">
         </div>
         <p class="figure-caption">
@@ -900,20 +884,26 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function setupScenarioSwitcher() {
-  var tabLinks = document.querySelectorAll('[data-scenario-tab]');
+  var tabBtns = document.querySelectorAll('.seg-btn[data-scenario-tab]');
   var panels = document.querySelectorAll('[data-scenario-panel]');
+  var slider = document.getElementById('seg-slider');
 
-  if (!tabLinks.length || !panels.length) {
+  if (!tabBtns.length || !panels.length) {
     return;
   }
 
+  function positionSlider(btn) {
+    if (!slider || !btn) return;
+    slider.style.width = btn.offsetWidth + 'px';
+    slider.style.transform = 'translateX(' + (btn.offsetLeft - 3) + 'px)';
+  }
+
   function showScenario(name) {
-    tabLinks.forEach(function (link) {
-      var isActive = link.getAttribute('data-scenario-tab') === name;
-      if (link.parentElement) {
-        link.parentElement.classList.toggle('is-active', isActive);
-      }
-      link.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    tabBtns.forEach(function (btn) {
+      var isActive = btn.getAttribute('data-scenario-tab') === name;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive) positionSlider(btn);
     });
 
     panels.forEach(function (panel) {
@@ -938,14 +928,20 @@ function setupScenarioSwitcher() {
     });
   }
 
-  tabLinks.forEach(function (link) {
-    link.addEventListener('click', function (event) {
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (event) {
       event.preventDefault();
-      showScenario(link.getAttribute('data-scenario-tab'));
+      showScenario(btn.getAttribute('data-scenario-tab'));
     });
   });
 
   showScenario('outdoor');
+
+  // Reposition slider on resize
+  window.addEventListener('resize', function () {
+    var active = document.querySelector('.seg-btn.is-active');
+    if (active) positionSlider(active);
+  });
 }
 
 function attachPairSync(real, rviz) {
@@ -1071,9 +1067,9 @@ function attachPairSync(real, rviz) {
 
   var ACTIVE_COLOR = '#2563eb';
   var FORMULAS = {
-    gain:     '<b>Path Gain:</b> $q(p)=g(p)$ &mdash; sums gain over all visited nodes. <b class="has-text-warning-dark">Con:</b> no incentive to explore — frontier nodes offering higher future gain are not preferred.',
-    ratio:    '<b>Path Ratio:</b> $r(p)=g(p)/c(p)$ &mdash; maximizes gain-per-cost. <b class="has-text-warning-dark">Con:</b> implicitly assumes the current ratio holds for the remaining budget, ignoring frontier information entirely.',
-    expected: '<b>Expected Gain (ours):</b> frontier paths score as $r(p)\\cdot C$, extrapolating their ratio over the full budget. Try sliding $C$ from 3 to 4: v\u2080\u2192v\u2082 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083!',
+    gain:     '⚠️ No incentive to explore; frontier nodes offering higher future gain are not preferred.',
+    ratio:    '⚠️ Assumes the current ratio holds for the remaining budget, ignoring frontier information.',
+    expected: '✅ Balances exploration and exploitation. Slide $C$ from 3 to 4: v\u2080\u2192v\u2082 jumps from score&thinsp;6 to score&thinsp;8, overtaking v\u2080\u2192v\u2081\u2192v\u2083.',
   };
 
   var activeCrit = 'gain';
